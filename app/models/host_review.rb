@@ -1,0 +1,2 @@
+class HostReview < Review
+end

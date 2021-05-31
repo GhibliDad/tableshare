@@ -1,0 +1,2 @@
+class GuestReview < Review
+end
