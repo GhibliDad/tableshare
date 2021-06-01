@@ -11,8 +11,8 @@ class User < ApplicationRecord
 
   # regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/
 
-  validates :first_name, :last_name, presence: true
-  validates :username, presence: true, uniqueness: true
-  validates :email, presence: true
-  validates :password, presence: true, length: { minimum: 4 }
+  # validates :first_name, :last_name, presence: true
+  # validates :username, presence: true, uniqueness: true
+  # validates :email, presence: true
+  # validates :password, presence: true, length: { minimum: 4 }
 end
