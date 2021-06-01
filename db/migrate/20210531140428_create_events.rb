@@ -4,8 +4,8 @@ class CreateEvents < ActiveRecord::Migration[6.0]
       t.string :title
       t.string :address
       t.text :ingredients
-      t.datetime :start
-      t.datetime :end
+      t.datetime :start_time
+      t.datetime :end_time
       t.text :description
       t.integer :available_seats
       t.references :user, null: false, foreign_key: true

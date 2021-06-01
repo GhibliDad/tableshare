@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_31_153702) do
+ActiveRecord::Schema.define(version: 2021_06_01_094008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 2021_05_31_153702) do
     t.string "title"
     t.string "address"
     t.text "ingredients"
-    t.datetime "start"
-    t.datetime "end"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.text "description"
     t.integer "available_seats"
     t.bigint "user_id", null: false
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2021_05_31_153702) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "chatroom_id", null: false
+    t.boolean "active", default: true
     t.index ["chatroom_id"], name: "index_events_on_chatroom_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(version: 2021_05_31_153702) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "message"
     t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
