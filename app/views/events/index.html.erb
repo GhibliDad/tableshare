@@ -1,2 +1,4 @@
-<p><%= @events %></p>
-d
+<% @events.each do |event| %>
+  <p><%= link_to event.title, event_path(event)%></p>
+<% end %>
+

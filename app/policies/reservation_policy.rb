@@ -1,4 +1,4 @@
-class EventPolicy < ApplicationPolicy
+class ReservationPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope.all
@@ -6,6 +6,10 @@ class EventPolicy < ApplicationPolicy
   end
 
   def show?
+    true
+  end
+
+  def create?
     true
   end
 end

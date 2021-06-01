@@ -5,6 +5,9 @@ class EventsController < ApplicationController
   end
 
   def show
+    @event = Event.find(params[:id])
+    @reservation = Reservation.new
+    authorize @event
   end
 
   def new
