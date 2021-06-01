@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_01_094008) do
+ActiveRecord::Schema.define(version: 2021_06_01_135145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 2021_06_01_094008) do
   create_table "chatrooms", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "event_id"
+    t.index ["event_id"], name: "index_chatrooms_on_event_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -33,9 +35,7 @@ ActiveRecord::Schema.define(version: 2021_06_01_094008) do
     t.boolean "open", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "chatroom_id", null: false
     t.boolean "active", default: true
-    t.index ["chatroom_id"], name: "index_events_on_chatroom_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2021_06_01_094008) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.string "status"
+    t.string "status", default: "pending"
     t.text "message"
     t.bigint "event_id", null: false
     t.bigint "user_id", null: false
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 2021_06_01_094008) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "events", "chatrooms"
+  add_foreign_key "chatrooms", "events"
   add_foreign_key "events", "users"
   add_foreign_key "messages", "chatrooms"
   add_foreign_key "messages", "users"

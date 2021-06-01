@@ -3,5 +3,5 @@ class Event < ApplicationRecord
   has_many :reservations
   has_one :chatroom
 
-  validates :title, :start, :end, :description, :address, :ingredients, :available_seats, presence: true
+  validates :title, :description, :address, :ingredients, :available_seats, presence: true
 end
