@@ -1,18 +1,55 @@
-<%= @event.title %>
-<% link_to 'Reservation', event_reservations_path(@event), method: :post %>
+<div class="banner" style="background-image:url(https://source.unsplash.com/random); height: 400px;">
+  <h1 style="padding-top:220px; padding-left:70px;"><%= @event.title %></h1>
+</div>
+<div class="container my-5">
+  <!-- <div class="row py-5">
+    <div class="col-12">
+      <h2><%= @event.title %></h2>
+    </div>
+  </div> -->
+  <div class="row">
+    <div class="col-4">
+      <div class="p-3 mr-3 border">
+        <p><strong>Price:</strong> <%= @event.price %> SEK</p>
+        <p><strong>Available seats: </strong> <%= @event.available_seats %></p>
+        <p><strong>Start time: </strong> <%= @event.start_time %></p>
+        <p><strong>End time: </strong> <%= @event.end_time %></p>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="row">
+        <div class="col-12">
+          <p><%= @event.description %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <p><strong>Adress: </strong> <%= @event.address %></p>
+        </div>
+        <div class="col-12">
+          <p><strong>Ingredients:</strong>
+            <%= @event.ingredients %></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <button type="button" class="btn btn-outline-primary w-100 mt-4" data-toggle="modal" data-target="#exampleModal">
+            Make a reservation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Make a reservation
-</button>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Make a reservation</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Extra information:</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -20,7 +57,7 @@
       <div class="modal-body">
         <%= simple_form_for([@event, @reservation]) do |f| %>
         <%= f.input :message %>
-        <%= f.submit 'Request', class: 'btn btn-outline-primary' %>
+        <%= f.submit 'Request reservation', class: 'btn btn-outline-primary' %>
         <% end %>
       </div>
     </div>
