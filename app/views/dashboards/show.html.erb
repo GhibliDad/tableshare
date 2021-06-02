@@ -1,0 +1,59 @@
+<div class="row secondary_navbar d-flex justify-content-around align-items-center text-center">
+  <div class="col-2 m-auto"><i class="far fa-user-circle mx-2"></i><p class="my-0">Edit profile</p></div>
+    <div class="col-2 m-auto"><i class="far fa-list-alt mx-2"></i><p class="my-0">My Reservations</p></div>
+    <div class="col-2 m-auto">
+      <p class="my-0"><strong><%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></strong></p>
+      <p class="my-0"><%= current_user.username %></p>
+    </div>
+    <div class="col-2 m-auto"><i class="fas fa-utensils mx-2"></i><p class="my-0">My Tables</p></div>
+    <div class="col-2 m-auto"><i class="far fa-envelope mx-2"></i><p class="my-0">My Messages</p></div>
+</div>
+
+<div class="my-5">
+  <h2 id="Edit Profile" class="text-center mb-5"><strong>Edit Profile</strong></h2>
+  <div class="row justify-content-around align-items-center">
+    <div class="col-5">
+      <%= simple_form_for(current_user, method: :patch, url: dashboard_path) do |f| %>
+      <%= f.input :photo %>
+      <%= f.input :username %>
+      <%= f.input :first_name %>
+      <%= f.input :last_name %>
+      <%= f.input :about, as: :text %>
+      <%= f.input :address %>
+      <%= f.input :phone_number %>
+      <%= f.input :allergies %>
+      <%= f.submit 'Edit', class: 'btn btn-warning w-100'%>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="my-5">
+  <h2 id="My Reservations" class="text-center mb-5"><strong>My Reservations</strong></h2>
+    <div class="row justify-content-around align-items-center">
+      <ul>
+        <li>
+          <% @reservations.each do |reservation| %>
+          <%= reservation.event.title %>
+          <%= reservation.event.start_time %>
+          <%= reservation.event.end_time %>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="my-5">
+  <h2 id="My Tables" class="text-center mb-5"><strong>My Tables</strong></h2>
+    <div class="row justify-content-around align-items-center">
+      <ul>
+        <% @events.each do |event| %>
+        <li>
+          <%= event.title %>
+          <%= event.start_time %>
+          <%= event.end_time %>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>
+
+

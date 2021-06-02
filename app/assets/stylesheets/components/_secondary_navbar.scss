@@ -1,0 +1,20 @@
+.secondary_navbar {
+  background: #FFFAF3;
+  height: 88px;
+  position: fixed;
+  width: 100vw;
+  left: 0px;
+  top: 60px;
+  position: sticky;
+  top: 0;
+  box-shadow: 0 4px 2px -2px lightgray;
+  z-index: 100;
+}
+
+.form-control.is-valid {
+  border-color: #FF9000;
+}
+
+.form-control.is-valid:focus {
+  border-color: #FF9000;
+}
