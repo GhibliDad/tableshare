@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :messages
   has_many :reviews, through: :reservations
 
+  has_one_attached :photo
+
   # regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/
 
   # validates :first_name, :last_name, presence: true
