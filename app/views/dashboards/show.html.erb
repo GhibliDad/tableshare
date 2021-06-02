@@ -2,8 +2,12 @@
   <div class="col-2 m-auto"><i class="far fa-user-circle mx-2"></i><p class="my-0">Edit profile</p></div>
     <div class="col-2 m-auto"><i class="far fa-list-alt mx-2"></i><p class="my-0">My Reservations</p></div>
     <div class="col-2 m-auto">
-      <p class="my-0"><strong><%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></strong></p>
-      <p class="my-0"><%= current_user.username %></p>
+      <% if current_user.first_name && current_user.last_name %>
+        <p class="my-0"><strong><%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></strong></p>
+        <p class="my-0"><%= current_user.username %></p>
+      <% else %>
+        <p class="my-0"><strong><%= current_user.email %></strong></p>
+      <% end %>
     </div>
     <div class="col-2 m-auto"><i class="fas fa-utensils mx-2"></i><p class="my-0">My Tables</p></div>
     <div class="col-2 m-auto"><i class="far fa-envelope mx-2"></i><p class="my-0">My Messages</p></div>
@@ -11,6 +15,13 @@
 
 <div class="my-5">
   <h2 id="Edit Profile" class="text-center mb-5"><strong>Edit Profile</strong></h2>
+  <div class="d-flex justify-content-center mb-5">
+    <% if current_user.photo.attached? %>
+      <%= cl_image_tag current_user.photo.key, width: 120, height: 120, crop: :thumb, radius: 'max' %>
+    <% else %>
+     <%= image_tag "https://res.cloudinary.com/dxiatpprs/image/upload/v1622037671/Mask_Group_1_agdpry.png", width: 120, height: 120, radius: 'max' %>
+    <% end %>
+  </div>
   <div class="row justify-content-around align-items-center">
     <div class="col-5">
       <%= simple_form_for(current_user, method: :patch, url: dashboard_path) do |f| %>
