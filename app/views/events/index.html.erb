@@ -1,5 +1,27 @@
-  <% @events.each do |event| %>
-    <p><%= link_to event.title, event_path(event)%></p>
-  <% end %>
-</div>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="row">
+        <div class="col-12">
+
+          <% @events.each do |event| %>
+            <%= link_to event_path(event) do %>
+              <div class="card-product">
+                <img src="https://source.unsplash.com/random" />
+                <div class="card-product-infos">
+                  <h2><%= event.title %></h2>
+                  <p><%= event.description %></p>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="border bg-light vh-100">
+        <h3>MAPI </h3>
+      </div>
+    </div>
+  </div>
 
