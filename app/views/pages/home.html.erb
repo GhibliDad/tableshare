@@ -1,2 +1,42 @@
-<h1>Pages#home</h1>
+<div>
+  <div class="banner_home">
+    <%= cl_image_tag ("tableshare/tableshare_01_juwl72.jpg")%>
+    <h1>Share food.</h1>
+    <h1>Share happiness.</h1>
+    <h1>TableShare.</h1>
+  </div>
+</div>
 <p>Find me in app/views/pages/home.html.erb</p>
+
+<div class="container">
+  <div class="row justify-content-around align-items-center">
+    <div class="col-8">
+      <div class="row">
+        <div class="col-12 pr-0">
+            <% @events.each do |event| %>
+              <%= link_to event_path(event), {class: 'text-decoration-none'} do %>
+                <div class="card-product p-3">
+                  <img src="https://source.unsplash.com/random?food">
+                  <div class="card-product-infos w-100">
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex justify-content-left">
+                        <img src="https://source.unsplash.com/random?person" style="width:30px; height:30px;" />
+                        <p class="ml-2"><%= event.user.email %></p>
+                      </div>
+                      <p>€ <%= event.price %></p>
+                    </div>
+                    <div>
+                      <h3 class="mt-2"><%= event.title %></h3>
+                      <p><%= event.description %></p>
+                      <p class="mt-3"><%= event.start_time %> time goes here</p>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
