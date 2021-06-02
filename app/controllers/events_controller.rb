@@ -8,6 +8,8 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @reservation = Reservation.new
     authorize @event
+    @attendees = @event.reservations
+    @host = @event.user
   end
 
   def new

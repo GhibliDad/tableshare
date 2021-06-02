@@ -1,10 +1,10 @@
 .card-product {
   overflow: hidden;
-  height: 120px;
+  height: 180px;
   background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
-  align-items: center;
+  //align-items: center;
+  border-top: 1px solid rgb(230,230,230)
 }
 
 .card-product img {
@@ -13,7 +13,7 @@
   object-fit: cover;
 }
 
-.card-product h2 {
+.card-product h3 {
   font-size: 16px;
   font-weight: bold;
   margin: 0;
@@ -28,5 +28,5 @@
 }
 
 .card-product .card-product-infos {
-  padding: 16px;
+  padding: 12px;
 }
