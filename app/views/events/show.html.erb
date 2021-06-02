@@ -10,6 +10,7 @@
   <div class="row">
     <div class="col-4">
       <div class="p-3 mr-3 border">
+        <p><strong>Host:</strong> <%= @host.first_name %> (<%= @host.username %>) </p>
         <p><strong>Price:</strong> <%= @event.price %> SEK</p>
         <p><strong>Available seats: </strong> <%= @event.available_seats %></p>
         <p><strong>Start time: </strong> <%= @event.start_time %></p>
@@ -37,6 +38,16 @@
             Make a reservation
           </button>
         </div>
+      </div>
+      <div>
+        <ul>
+          <% @attendees.each do |attendee| %>
+            <li>
+              <% guest = attendee.user %>
+              <p><%= guest.email %></p>
+            </li>
+          <% end %>
+        </ul>
       </div>
     </div>
   </div>
