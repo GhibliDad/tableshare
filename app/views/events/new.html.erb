@@ -5,7 +5,7 @@
         <%= simple_form_for @event do |f| %>
         <%= f.input :title %>
         <%= f.input :address, input_html: { id: 'address'} %>
-        <%= f.input :start_time, as: :date, label: 'Date' %>
+        <%= f.input :date %>
         <%= f.input :start_time, as: :time %>
         <%= f.input :end_time, as: :time %>
         <%= f.input :description %>
