@@ -1,1 +1,47 @@
+.card-grid {
+  display: grid;
+}
 
+.card-home {
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  height: 500px;
+  width: 400px;
+  margin: 16px;
+}
+
+.card-home > img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-home h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-home p {
+  font-size: 12px;
+  opacity: .7;
+  margin: 0;
+}
+
+
+.card-home .card-home-infos {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+}
+
+.card-home-infos .card-home-user {
+  position: absolute;
+  left: 16px;
+  top: -20px;
+  width: 40px;
+  border: 1 solid white;
+}
