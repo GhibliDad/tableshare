@@ -2,6 +2,8 @@ class EventsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     @events = policy_scope(Event).order(created_at: :desc)
+    @location = Geocoder.search(params[:address]).first
+    @tables = Event.near(@location.coordinates, 2, units: :km)
     @coordinates = @events.geocoded.map do |event|
       {
         lat: event.latitude,
