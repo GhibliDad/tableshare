@@ -19,12 +19,14 @@ class EventsController < ApplicationController
   end
 
   def new
-
+    @event = Event.new
+    authorize @event
   end
 
   def create
     @event = Event.new(event_params)
     @event.user = current_user
+    authorize @event
     if @event.save
       @chatroom = Chatroom.new
       @chatroom.event = @event
