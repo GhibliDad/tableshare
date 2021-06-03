@@ -33,6 +33,7 @@ end
     address: Faker::Address.full_address,
     description: Faker::Food.description,
     ingredients: Faker::Food.ingredient,
+    #date: Faker::Date.between(from: '2021-06-10', to: '2021-06-20'),
     available_seats: rand(0..6),
     price: rand(60..200),
     start_time: Faker::Time.between_dates(from: Date.today - 1, to: Date.today, period: :night),

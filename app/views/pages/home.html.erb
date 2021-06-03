@@ -7,14 +7,14 @@
         <h1><strong>TableShare.</strong></h1>
       </div>
       <div class="search">
-        <table>
         <%= form_tag events_path, method: :get, class: 'form-inline', style: 'display:inline !important;' do %>
-          <td><%= text_field_tag :address %></td>
-          <td><%= date_field_tag :date1 %></td>
-          <td><%= date_field_tag :date2 %></td>
-          <td><%= submit_tag 'Search!', class: 'btn btn-warning' %></td>
+         <div class="search-inputs d-flex">
+          <%= text_field_tag :address %>
+          <%= date_field_tag :date1 %>
+          <%= date_field_tag :date2 %>
+          <%= submit_tag 'Search!', class: 'btn btn-warning' %>
+        </div>
         <% end %>
-      </table>
       </div>
     </div>
   </div>
@@ -40,7 +40,7 @@
                 <div>
                   <h3 class="mt-2"><%= event.title %></h3>
                   <p><%= event.description %></p>
-                  <p class="mt-3"><%= event.start_time %> time goes here</p>
+                  <p class="mt-3"><%= event.start_time.to_formatted_s(:short)  %></p>
                   <p class="ml-2"><%= event.user.email %></p>
                   <p><%= event.price %>SEK</p>
                 </div>
