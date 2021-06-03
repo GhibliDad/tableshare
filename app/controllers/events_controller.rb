@@ -1,10 +1,14 @@
 class EventsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
-    @events = policy_scope(Event).order(created_at: :desc)
+    @allEvents = policy_scope(Event).order(created_at: :desc)
     @location = Geocoder.search(params[:address]).first
-    @tables = Event.near(@location.coordinates, 2, units: :km)
-    @coordinates = @events.geocoded.map do |event|
+    @tables = Event.near(@location.coordinates, 5, units: :km)
+    #query = ("SELECT * FROM events WHERE start_date BETWEEN ? AND ?", params[:date1], params[:date2])
+    #@result = @tables.where("start_time = BETWEEN ? AND ?", params[:date1], params[:date2])
+    #@result = @tables.where("start_time > ? AND end_time < ?", params[:date1], params[:date2])
+    @events = @tables.where("start_time > ?", params[:date1]).where("end_time < ?", params[:date2])
+    @coordinates = @tables.geocoded.map do |event|
       {
         lat: event.latitude,
         lng: event.longitude
@@ -42,6 +46,6 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:title, :start_time, :end_time, :description, :address, :available_seats, :ingredients)
+    params.require(:event).permit(:title, :start_time, :end_time, :description, :address, :available_seats, :ingredients, :price)
   end
 end
