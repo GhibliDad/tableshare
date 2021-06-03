@@ -1,17 +1,21 @@
 <!-- <div class="container"> -->
   <div class="banner_home">
-    <div class="banner-info">
-      <h1><strong>Share food.</strong></h1>
-      <h1><strong>Share happiness.</strong></h1>
-      <h1><strong>TableShare.</strong></h1>
-    </div>
-    <div class="search d-flex">
-      <%= form_tag events_path, method: :get, class: 'form-inline', style: 'display:inline !important;' do %>
-        <%= text_field_tag :address %>
-        <%= date_field_tag :date1 %>
-        <%= date_field_tag :date2 %>
-        <%= submit_tag 'Search!', class: 'btn btn-warning' %>
-      <% end %>
+    <div class="container">
+      <div class="banner-info">
+        <h1><strong>Share food.</strong></h1>
+        <h1><strong>Share happiness.</strong></h1>
+        <h1><strong>TableShare.</strong></h1>
+      </div>
+      <div class="search">
+        <table>
+        <%= form_tag events_path, method: :get, class: 'form-inline', style: 'display:inline !important;' do %>
+          <td><%= text_field_tag :address %></td>
+          <td><%= date_field_tag :date1 %></td>
+          <td><%= date_field_tag :date2 %></td>
+          <td><%= submit_tag 'Search!', class: 'btn btn-warning' %></td>
+        <% end %>
+      </table>
+      </div>
     </div>
   </div>
 <!-- </div> -->
@@ -19,8 +23,11 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12">
-      <h2 class="m-5" style="color:white">Tables near you!</h2>
+      <h2 class="m-4" style="color:black"><strong>Tables shared near you!</strong></h2>
     </div>
+  </div>
+  <div class="row justify-content-around">
+    <div class="cards">
       <% @events.each do |event| %>
         <%= link_to event_path(event), {class: 'text-decoration-none'} do %>
           <div class="card-home p-3">
@@ -42,6 +49,7 @@
           </div>
         <% end %>
       <% end %>
+    </div>
     </div>
   </div>
 </div>
