@@ -44,8 +44,14 @@
   position: absolute;
   left: 16px;
   top: -20px;
-  width: 40px;
   border: 1 solid white;
+}
+
+
+.card-home-user {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 // cards grid
