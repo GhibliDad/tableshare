@@ -25,7 +25,6 @@
   <div class="row justify-content-around align-items-center">
     <div class="col-5">
       <%= simple_form_for(current_user, method: :patch, url: dashboard_path) do |f| %>
-      <%= f.input :photo %>
       <%= f.input :username %>
       <%= f.input :first_name %>
       <%= f.input :last_name %>
@@ -33,38 +32,46 @@
       <%= f.input :address %>
       <%= f.input :phone_number %>
       <%= f.input :allergies %>
+      <%= f.input :photo, as: :file, input_html: { class: 'd-none'}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo' %>
       <%= f.submit 'Edit', class: 'btn btn-warning w-100'%>
       <% end %>
     </div>
   </div>
 </div>
-<div class="my-5">
-  <h2 id="My Reservations" class="text-center mb-5"><strong>My Reservations</strong></h2>
-    <div class="row justify-content-around align-items-center">
-      <ul>
-        <li>
-          <% @reservations.each do |reservation| %>
-          <%= reservation.event.title %>
-          <%= reservation.event.start_time %>
-          <%= reservation.event.end_time %>
-        <% end %>
-      </li>
-    </ul>
+
+<h2 class="text-center mb-5"><strong>My Reservations</strong></h2>
+
+<% @reservations.each do |reservation| %>
+<div class="card-product p-3 mb-3 mx-auto" style="max-width: 720px">
+  <img src="https://source.unsplash.com/random?food" alt="a picture of food" class="cards-reservation"/>
+    <div class="card-product-infos">
+      <img src="https://source.unsplash.com/random?person" style="width:40px; height:40px;" class="avatar-bordered mt-0 mb-2 img-fluid" />
+      <%= link_to event_path, {class: 'text-decoration-none'} do %>
+      <h2 class="card-product-titles mt-3"><%= reservation.event.title %></h2>
+      <p class="mt-3"><em class="text-warning">Where:</em> <%= reservation.event.address %> <br><em class="text-warning">When:</em> <%= reservation.event.date %> <%= reservation.event.end_time.to_date %></p>
+    </div>
+      <div class="btn btn-outline-warning"><%= link_to "Edit attendance", reservation_path(reservation) %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+
+
+
+<h2 class="text-center my-5"><strong>My Tables</strong></h2>
+
+<% @events.each do |event| %>
+<div class="card-product p-3 mb-5 mx-auto" style="max-width: 720px">
+  <img src="https://source.unsplash.com/random?food" alt="a picture of food" class="cards-reservation"/>
+  <div class="card-product-infos">
+    <img src="https://source.unsplash.com/random?person" style="width:40px; height:40px;" class="avatar-bordered mt-0 mb-2 img-fluid" />
+    <%= link_to event_path, {class: 'text-decoration-none'} do %>
+    <h2 class="card-product-titles mt-3"><%= event.title %></h2>
+    <p class="mt-3">When:</em> <%= event.date %></p>
   </div>
 </div>
-<div class="my-5">
-  <h2 id="My Tables" class="text-center mb-5"><strong>My Tables</strong></h2>
-    <div class="row justify-content-around align-items-center">
-      <ul>
-        <% @events.each do |event| %>
-        <li>
-          <%= event.title %>
-          <%= event.start_time %>
-          <%= event.end_time %>
-        <% end %>
-      </li>
-    </ul>
-  </div>
-</div>
+<% end %>
+<% end %>
 
 

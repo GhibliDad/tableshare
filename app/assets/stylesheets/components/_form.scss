@@ -1,18 +1,19 @@
 // create a new table form
 .form-control, .input:focus{
-   border-color: rgba(251, 233, 213, 1);
+   border-color: rgba(255, 144, 0, 1);
    box-shadow: 1 1 1 1 rgba(255, 144, 0, 1);
    border-radius: 6px;
 }
 
 .upload-photo {
-  border: 1px solid rgba(251, 233, 213, 1);
+  border: 1px solid rgba(255, 144, 0, 1);
   padding: 16px 24px;
   cursor: pointer;
   font-weight: 500;
   background: white;
   border-radius: 6px;
   width: 100%;
+  text-align: center;
 }
 
 .btn .btn-warning .btn-outline-warning {

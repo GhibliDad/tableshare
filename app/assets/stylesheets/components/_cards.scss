@@ -1,15 +1,16 @@
 .card-product {
   overflow: hidden;
   height: 180px;
-  background: white;
+  background: #FFFAF3;
   display: flex;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
   //align-items: center;
-  border-top: 1px solid rgb(230,230,230)
 }
 
 .card-product-img {
   height: 100%;
-  width: 120px;
+  width: 142px;
   object-fit: cover;
 }
 
@@ -22,11 +23,46 @@
 .card-product p {
   font-size: 12px;
   line-height: 1.4;
-  opacity: .7;
+  color: grey;
+  opacity: 1;
   margin-bottom: 0;
   margin-top: 8px;
 }
 
 .card-product .card-product-infos {
-  padding: 12px;
+  padding: 0 12px 12px 12px;
 }
+
+// cards dashboard
+
+.card-product-infos {
+  color: grey;
+  opacity: .8;
+}
+
+.card-product-infos:hover {
+  color: grey;
+  opacity: 1;
+}
+
+.cards-reservation {
+  width: 142px;
+  height: 142px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding-top: 14px;
+}
+
+.card-product-titles {
+  color: #FF9000;
+  opacity: .8;
+}
+
+.card-product-titles:hover {
+  color: #FF9000;
+  opacity: 1;
+}
+
