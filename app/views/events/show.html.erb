@@ -11,7 +11,11 @@
   <div class="row">
     <div class="col-4">
       <div class="p-3 mr-3 border">
-        <p><strong>Host:</strong> <%= @host.first_name %> (<%= @host.username %>) </p>
+        <% if @host == current_user %>
+          <p><strong>Host:</strong> You 😊</p>
+        <% else %>
+          <p><strong>Host:</strong> <%= @host.first_name %> (<%= @host.username %>) </p>
+        <% end %>
         <p><strong>Price:</strong> <%= @event.price %> SEK</p>
         <p><strong>Available seats: </strong> <%= @event.available_seats %></p>
         <p><strong>Time: </strong>
@@ -33,13 +37,15 @@
             <%= @event.ingredients %></p>
         </div>
       </div>
-      <div class="row">
-        <div class="col-12">
-          <button type="button" class="btn btn-outline-primary w-100 mt-4" data-toggle="modal" data-target="#exampleModal">
-            Make a reservation
-          </button>
+      <% if @host != current_user %>
+        <div class="row">
+          <div class="col-12">
+            <button type="button" class="btn btn-outline-primary w-100 mt-4" data-toggle="modal" data-target="#exampleModal">
+              Make a reservation
+            </button>
+          </div>
         </div>
-      </div>
+      <% end %>
       <div>
         <ul>
           <% @attendees.each do |attendee| %>
