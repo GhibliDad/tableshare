@@ -23,7 +23,11 @@
                         <% else %>
                           <%= cl_image_tag 'https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width: 40, height: 40, class: "card-home-user avatar-bordered" %>
                         <% end %>
-                        <p class="ml-2"><%= event.user.email %></p>
+                        <% if event.user.first_name %>
+                          <p class="ml-2"><strong><%= event.user.first_name %></strong></p>
+                        <% else %>
+                          <p class="ml-2"><strong><%= event.user.email %></strong></p>
+                        <% end %>
                       </div>
                       <p>€ <%= event.price %></p>
                     </div>
@@ -41,7 +45,7 @@
       </div>
     </div>
     <div class="col-5 pl-0">
-      <div class="border bg-light vh-100">
+      <div class="border bg-light vh-100 sticky-top">
         <div id="map"
            style="width: 100%; height:100vh"
            data-markers="<%= @coordinates.to_json %>"
