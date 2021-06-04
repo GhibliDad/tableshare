@@ -17,6 +17,11 @@
 @import "components/cards";
 @import "components/cards_home_page";
 
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
 a:hover {
   text-decoration: none;
 }
