@@ -8,7 +8,7 @@
       </div>
       <div class="search">
         <%= form_tag events_path, method: :get, class: 'form-inline', style: 'display:inline !important;' do %>
-         <div class="search-inputs d-flex">
+         <div class="search-inputs d-flex" style="border: none;">
           <%= text_field_tag :address %>
           <%= date_field_tag :date1 %>
           <%= date_field_tag :date2 %>
