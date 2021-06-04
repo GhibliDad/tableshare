@@ -13,8 +13,8 @@
         <p><strong>Host:</strong> <%= @host.first_name %> (<%= @host.username %>) </p>
         <p><strong>Price:</strong> <%= @event.price %> SEK</p>
         <p><strong>Available seats: </strong> <%= @event.available_seats %></p>
-        <p><strong>Start time: </strong> <%= @event.start_time %></p>
-        <p><strong>End time: </strong> <%= @event.end_time %></p>
+        <p><strong>Time: </strong>
+          <%= @event.start_time.to_formatted_s(:short) %> </p>
       </div>
     </div>
     <div class="col-8">
