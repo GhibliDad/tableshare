@@ -31,16 +31,24 @@
       <% @events.each do |event| %>
         <%= link_to event_path(event), {class: 'text-decoration-none'} do %>
           <div class="card-home p-3">
-            <img src="https://source.unsplash.com/random?food">
+            <% if event.photo.attached? %>
+              <%= cl_image_tag event.photo.key %>
+            <% else %>
+              <img src="https://source.unsplash.com/random?food">
+            <% end %>
             <div class="card-home-infos w-100">
               <div class="">
                 <div class="">
-                  <img src="https://source.unsplash.com/random?person" style="width:40px; height:40px;" class="card-home-user avatar-bordered" />
+                  <% if event.user.photo.attached? %>
+                    <%= cl_image_tag event.user.photo.key, width:40, height:40, class: "card-home-user avatar-bordered" %>
+                  <% else %>
+                    <img src="https://source.unsplash.com/random?person" style="width:40px; height:40px;" class="card-home-user avatar-bordered" />
+                  <% end %>
                 </div>
                 <div>
                   <h3 class="mt-2"><%= event.title %></h3>
-                  <p><%= event.description %></p>
-                  <p class="mt-3"><%= event.start_time.to_formatted_s(:short) %></p>
+                  <p><%= event.description.truncate(150) %></p>
+                  <p class="mt-3"><%= event.start_time.to_formatted_s(:short)  %></p>
                   <p class="ml-2"><%= event.user.email %></p>
                   <p><%= event.price %>SEK</p>
                 </div>

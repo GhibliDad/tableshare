@@ -5,23 +5,31 @@
         <div class="col-12 pr-0">
           <div>
             <div class="p-4">
-              <h2>Tables in <%= @location.address.split[0] %></h2>
+              <h2>Tables near you </h2>
             </div>
             <% @events.each do |event| %>
               <%= link_to event_path(event), {class: 'text-decoration-none'} do %>
                 <div class="card-product p-3">
-                  <img src="https://source.unsplash.com/random?food" />
+                  <% if event.photo.attached? %>
+                    <%= cl_image_tag event.photo.key, class: "card-product-img" %>
+                  <% else %>
+                    <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802286/tableshare/placeholder_pykjcu.jpg', class: "card-product-img") %>
+                  <% end %>
                   <div class="card-product-infos w-100">
                     <div class="d-flex justify-content-between">
                       <div class="d-flex justify-content-left">
-                        <img src="https://source.unsplash.com/random?person" style="width:30px; height:30px;" />
+                       <% if event.user.photo.attached? %>
+                          <%= cl_image_tag event.user.photo.key, width:40, height:40, class: "card-home-user avatar-bordered" %>
+                        <% else %>
+                          <%= cl_image_tag 'https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width: 40, height: 40, class: "card-home-user avatar-bordered" %>
+                        <% end %>
                         <p class="ml-2"><%= event.user.email %></p>
                       </div>
                       <p>€ <%= event.price %></p>
                     </div>
                     <div>
                       <h3 class="mt-2"><%= event.title %></h3>
-                      <p><%= event.description %></p>
+                      <p><%= event.description.truncate(150) %></p>
                       <p class="mt-3"><%= event.start_time.to_formatted_s(:short) %> </p>
                     </div>
                   </div>
@@ -42,4 +50,7 @@
       </div>
     </div>
   </div>
+
+
+
 

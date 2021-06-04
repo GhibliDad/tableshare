@@ -1,15 +1,24 @@
 class EventsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
-    @allEvents = policy_scope(Event).order(created_at: :desc)
-    @location = Geocoder.search(params[:address]).first
-    @tables = Event.near(@location.coordinates, 5, units: :km)
-    @events = @tables.where("date(start_time) >= ? AND date(start_time) <= ?", params[:date1], params[:date2])
-    @coordinates = @events.geocoded.map do |event|
-      {
-        lat: event.latitude,
-        lng: event.longitude
-      }
+    @events = policy_scope(Event).order(created_at: :desc)
+    if params[:address]
+      @location = Geocoder.search(params[:address]).first
+      @tables = Event.near(@location.coordinates, 10, units: :km)
+      @events = @tables.where("date(start_time) >= ? AND date(start_time) <= ?", params[:date1], params[:date2])
+      @coordinates = @events.geocoded.map do |event|
+        {
+          lat: event.latitude,
+          lng: event.longitude
+        }
+      end
+    else
+      @coordinates = @events.geocoded.map do |event|
+        {
+          lat: event.latitude,
+          lng: event.longitude
+        }
+      end
     end
   end
 
@@ -43,7 +52,7 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:title, :start_time, :end_time,
-      :description, :address, :available_seats, :ingredients, :price, :date)
+    params.require(:event).permit(:title, :start_time, :end_time, :description,
+      :address, :available_seats, :ingredients, :price, :date, :photo)
   end
 end
