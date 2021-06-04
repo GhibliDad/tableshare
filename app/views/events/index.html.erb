@@ -23,7 +23,11 @@
                         <% else %>
                           <%= cl_image_tag 'https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width: 40, height: 40, class: "card-home-user avatar-bordered" %>
                         <% end %>
-                        <p class="ml-2"><%= event.user.email %></p>
+                        <% if event.user.first_name %>
+                          <p class="ml-2"><strong><%= event.user.first_name %></strong></p>
+                        <% else %>
+                          <p class="ml-2"><strong><%= event.user.email %></strong></p>
+                        <% end %>
                       </div>
                       <p>€ <%= event.price %></p>
                     </div>
