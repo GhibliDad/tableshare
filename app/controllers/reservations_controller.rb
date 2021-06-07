@@ -30,6 +30,22 @@ class ReservationsController < ApplicationController
     redirect_to user_path(@reservation.event.current_user)
   end
 
+  def accept
+    @reservation = Reservation.find(params[:id])
+    authorize @reservation
+    @reservation.status = "accepted"
+    @reservation.save
+    redirect_to user_path(current_user)
+  end
+
+  def decline
+    @reservation = Reservation.find(params[:id])
+    authorize @reservation
+    @reservation.status = "declined"
+    @reservation.save
+    redirect_to user_path(current_user)
+  end
+
   private
 
   def reservation_params
