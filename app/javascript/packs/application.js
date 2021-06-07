@@ -33,11 +33,34 @@ document.addEventListener('turbolinks:load', () => {
   // initSelect2();
 });
 
+var scrolled = false;
+
+  function updateScroll(){
+      if(!scrolled){
+        console.log(scrolled)
+          var element = document.getElementById("messages_box");
+          if(element){
+          element.scrollTop = element.scrollHeight;
+        };
+      }
+  }
+  if(document.getElementById("messages_box")){
+    document.getElementById("messages_box").addEventListener('scroll', function(){
+          scrolled = true;
+  })
+  };
+
+
 import { initMapbox } from '../plugins/init_mapbox';
 import { initAutocomplete } from '../plugins/init_autocomplete';
+import { initChatroomCable } from '../channels/chatroom_channel';
+
 
 document.addEventListener('turbolinks:load', () => {
   initAutocomplete();
   initMapbox();
+  initChatroomCable();
+  updateScroll();
+  // setInterval(updateScroll,1000);
 });
 

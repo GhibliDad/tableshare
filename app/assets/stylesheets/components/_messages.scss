@@ -1,0 +1,38 @@
+.chat {
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #fe9000;
+  border-radius: 8px;
+}
+
+#messages_box {
+  height: 300px;
+  overflow: scroll;
+  margin: 0 0 8px 0;
+}
+
+.message {
+  margin: 8px;
+  padding: 2px 0;
+  border-radius: 8px;
+  width: fit-content;
+    em {
+      font-size: 10px;
+      color: rgb(150,150,150);
+    }
+    p {
+      margin: 0;
+      width: fit-content;
+      padding: 0 12px;
+    }
+}
+
+.my-message {
+  background-color: #f5e5d3;
+  border: 1px solid #fe9000;
+
+}
+
+.guests-message {
+  background-color: #f7eee6;
+}

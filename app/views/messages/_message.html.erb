@@ -1,0 +1,13 @@
+  <% if message.user == current_user %>
+    <div class="d-flex justify-content-end">
+      <div class="message my-message" id="message-<%= message.id %>" data-user="<%= message.user.id %>">
+        <p><em><small>You <%= message.created_at.strftime("%I:%M%p") %></small></em></p>
+        <p><%= message.message %></p>
+      </div>
+    </div>
+  <% else %>
+    <div class="message guests-message" id="message-<%= message.id %>">
+      <p><em><small><%= message.user.first_name %> <%= message.created_at.strftime("%I:%M%p") %></small></em></p>
+      <p><%= message.message %></p>
+    </div>
+<% end %>
