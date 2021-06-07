@@ -58,6 +58,17 @@
           <% end %>
           <div class="btn btn-outline-warning text-warning"><%= link_to "Edit attendance", reservation_path(reservation) %></div>
         </div>
+      <%= link_to event_path, {class: 'text-decoration-none'} do %>
+      <h2 class="card-product-titles mt-3"><%= reservation.event.title %></h2>
+      <p class="mt-3"><em class="text-warning">Where:</em> <%= reservation.event.address %> <br><em class="text-warning">When:</em> <%= reservation.event.start_time.to_formatted_s(:short) %></p>
+    </div>
+      <% if reservation.event.end_time < DateTime.now %>
+        <% unless reservation.reviews.size.positive? %>
+          <div class="btn btn-outline-warning"><%= link_to "Leave Review", new_event_reservation_review_path(reservation.event, reservation) %>
+        <% end %>
+      <% else %>
+        <div class="btn btn-outline-warning"><%= link_to "Edit attendance", reservation_path(reservation) %>
+      <% end %>
       </div>
     <% end %>
 <% end %>
@@ -65,6 +76,7 @@
 
 
 <h2 id="tables" class="text-center my-5"><i class="fas fa-utensils mx-2 text-warning"></i> <strong>My Tables</strong></h2>
+
 <% @events.each do |event| %>
 <div class="card-product p-3 mb-5 mx-auto" style="width: 720px">
   <img src="https://source.unsplash.com/random?food" alt="a picture of food" class="cards-reservation"/>

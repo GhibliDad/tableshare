@@ -1,0 +1,19 @@
+<div class="form-container mb-5">
+  <div class="row justify-content-center mt-5">
+    <div class="col-5">
+      <h2 class="mb-5 text-center text-warning"><strong>Leave a review for <%= @event.user %></strong></h2>
+        <%= simple_form_for ([@event, @reservation, @review]) do |f| %>
+        <%= f.input :heading %>
+        <%= f.input :content %>
+        <%= f.input :food_rating, :collection => 0..5 %>
+        <%= f.input :host_rating, :collection => 0..5 %>
+        <%= f.input :vibe_rating, :collection => 0..5 %>
+        <%= f.input :photo, as: :file, input_html: { class: 'd-none'}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo' %>
+        <%= f.submit 'Submit Review', class: 'btn btn-warning' %>
+        <%= link_to 'Cancel', event_path(@event), class: 'btn btn-outline-warning' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= console  %>
