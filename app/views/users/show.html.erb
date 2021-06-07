@@ -24,7 +24,7 @@
   </div>
   <div class="row justify-content-around align-items-center">
     <div class="col-5">
-      <%= simple_form_for(current_user, method: :patch, url: dashboard_path) do |f| %>
+      <%= simple_form_for(current_user, method: :patch, url: user_path) do |f| %>
       <%= f.input :username %>
       <%= f.input :first_name %>
       <%= f.input :last_name %>

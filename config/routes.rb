@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
   resources :reservations, only: [:show, :edit, :update]
 
-  resources :dashboards, only: [:show, :edit, :update]
+  resources :users, only: [:show, :edit, :update]
   # route for user show page
   # get "users/:id", to: "users#show", as: :user
   # get "users/:id/edit", to: "users#edit", as: :edit_user
