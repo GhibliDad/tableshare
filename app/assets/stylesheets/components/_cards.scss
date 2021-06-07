@@ -1,6 +1,6 @@
 .card-product {
   overflow: hidden;
-  height: 180px;
+  height: 100%;
   background: #FFFAF3;
   display: flex;
   border-radius: 8px;
@@ -26,11 +26,10 @@
   color: rgb(50,50,50);
   opacity: 1;
   margin-bottom: 0;
-  margin-top: 8px;
 }
 
 .card-product .card-product-infos {
-  padding: 0 12px 12px 12px;
+  padding: 0 12px 0px 12px;
 }
 
 // cards dashboard
@@ -74,11 +73,29 @@
   color: white;
 }
 
+.card-product {
+  position: relative;
+}
 
+.attendance-info {
+  position: absolute;
+  top: 34px;
+  right: 40px;
+  text-align: center;
+ }
 
+.attendance-info p {
+  font-size: 14px;
+  opacity: 0.7;
+}
 
+.btn-outline-warning a {
+  color: #FF9000;
+}
 
-
+.btn-outline-warning a:hover {
+  color: white;
+}
 
 
 

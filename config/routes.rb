@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   resources :events, except: [:destroy] do
-    resources :reservations, only: :create
+    resources :reservations, only: [:create] do
       resources :messages, only: :create
+      resources :reviews, only: [:new, :create]
+    end
   #   resources :chatrooms, only: [:create]
   end
   resources :reservations, only: [:show, :edit, :update]

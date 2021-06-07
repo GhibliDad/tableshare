@@ -1,20 +1,18 @@
-<div class="row secondary_navbar d-flex justify-content-around align-items-center text-center">
-  <div class="col-2 m-auto"><i class="far fa-user-circle mx-2"></i><%= link_to "Edit profile", "#edit" %><p class="my-0"></p></div>
-    <div class="col-2 m-auto"><i class="far fa-list-alt mx-2"></i><%= link_to "My Reservations", "#reservations" %><p class="my-0"></p></div>
-    <div class="col-2 m-auto">
-      <% if current_user.first_name && current_user.last_name %>
-        <p class="my-0"><strong><%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></strong></p>
-        <p class="my-0"><%= current_user.username %></p>
-      <% else %>
-        <p class="my-0"><strong><%= current_user.email %></strong></p>
-      <% end %>
-    </div>
-    <div class="col-2 m-auto"><i class="fas fa-utensils mx-2"></i><%= link_to "My Tables", "#tables" %><p class="my-0"></p></div>
-    <div class="col-2 m-auto"><i class="far fa-envelope mx-2"></i><%= link_to "My Messages", "#messages" %><p class="my-0"></p></div>
+<div class="row secondary_navbar d-flex justify-content-around align-items-center text-left">
+  <div class="col-2 m-auto">
+    <% if current_user.first_name && current_user.last_name %>
+      <p class="my-0 text-warning">Welcome<strong> <%= current_user.first_name.capitalize %>!</strong></p>
+    <% else %>
+      <p class="my-0"><strong><%= current_user.email %></strong></p>
+    <% end %>
+  </div>
+    <div class="col-2 m-auto text-warning"><i class="far fa-user-circle mx-2"></i><%= link_to "Edit profile", "#edit" %></div>
+    <div class="col-2 m-auto text-warning"><i class="far fa-list-alt mx-2"></i><%= link_to "My Reservations", "#reservations" %></div>
+    <div class="col-2 m-auto text-warning"><i class="fas fa-utensils mx-2"></i><%= link_to "My Tables", "#tables" %></div>
 </div>
 
 <div class="my-5">
-  <h2 id="edit" class="text-center mb-5"><strong>Edit Profile</strong></h2>
+  <h2 id="edit" class="text-center mb-5"><i class="far fa-user-circle mx-2 text-warning"></i> <strong>Edit Profile</strong></h2>
   <div class="d-flex justify-content-center mb-5">
     <% if current_user.photo.attached? %>
       <%= cl_image_tag current_user.photo.key, width: 120, height: 120, crop: :thumb, radius: 'max' %>
@@ -39,36 +37,74 @@
   </div>
 </div>
 
-<h2 id="reservations"class="text-center mb-5"><strong>My Reservations</strong></h2>
+<h2 id="reservations"class="text-center mb-5"><i class="far fa-list-alt mx-2 text-warning"></i> <strong>My Reservations</strong></h2>
 
 <% @reservations.each do |reservation| %>
-<div class="card-product p-3 mb-3 mx-auto" style="max-width: 720px">
+<div class="card-product p-3 mb-3 mx-auto" style="width: 720px">
   <img src="https://source.unsplash.com/random?food" alt="a picture of food" class="cards-reservation"/>
     <div class="card-product-infos">
       <img src="https://source.unsplash.com/random?person" style="width:40px; height:40px;" class="avatar-bordered mt-0 mb-2 img-fluid" />
+    <%= link_to event_path, {class: 'text-decoration-none'} do %>
+      <h2 class="card-product-titles mt-2"><%= reservation.event.title %></h2>
+      <p class="mt-2 position-absolute bottom-0"><em class="text-warning">Where:</em> <%= reservation.event.address.truncate(40) %> <br><em class="text-warning">When:</em> <%= reservation.event.start_time.to_formatted_s(:short) %></p>
+        <div class="attendance-info border-attendance-info">
+          <p class="d-inline">Status: </p><br>
+          <% if reservation.status == 'accepted' %>
+            <p class="text-success"><i class="product-info-icons fas fa-check text-warning"> </i><%= reservation.status.capitalize %></p>
+          <% elsif reservation.status == 'declined' %>
+            <p class="text-danger"><i class="product-info-icons fas fa-times text-warning"> </i> <%= reservation.status.capitalize %></p>
+          <% else %>
+            <p class="text-dark"><i class="product-info-icons far fa-clock text-warning"> </i> <%= reservation.status.capitalize %></p><br>
+          <% end %>
+          <div class="btn btn-outline-warning text-warning"><%= link_to "Edit attendance", reservation_path(reservation) %></div>
+        </div>
       <%= link_to event_path, {class: 'text-decoration-none'} do %>
       <h2 class="card-product-titles mt-3"><%= reservation.event.title %></h2>
       <p class="mt-3"><em class="text-warning">Where:</em> <%= reservation.event.address %> <br><em class="text-warning">When:</em> <%= reservation.event.start_time.to_formatted_s(:short) %></p>
     </div>
-      <div class="btn btn-outline-warning"><%= link_to "Edit attendance", reservation_path(reservation) %>
+      <% if reservation.event.end_time < DateTime.now %>
+        <% unless reservation.reviews.size.positive? %>
+          <div class="btn btn-outline-warning"><%= link_to "Leave Review", new_event_reservation_review_path(reservation.event, reservation) %>
+        <% end %>
+      <% else %>
+        <div class="btn btn-outline-warning"><%= link_to "Edit attendance", reservation_path(reservation) %>
+      <% end %>
       </div>
-    </div>
-  <% end %>
+    <% end %>
 <% end %>
+</div>
 
 
-
-
-<h2 id="tables" class="text-center my-5"><strong>My Tables</strong></h2>
+<h2 id="tables" class="text-center my-5"><i class="fas fa-utensils mx-2 text-warning"></i> <strong>My Tables</strong></h2>
 
 <% @events.each do |event| %>
-<div class="card-product p-3 mb-5 mx-auto" style="max-width: 720px">
+<div class="card-product p-3 mb-5 mx-auto" style="width: 720px">
   <img src="https://source.unsplash.com/random?food" alt="a picture of food" class="cards-reservation"/>
   <div class="card-product-infos">
     <img src="https://source.unsplash.com/random?person" style="width:40px; height:40px;" class="avatar-bordered mt-0 mb-2 img-fluid" />
     <%= link_to event_path, {class: 'text-decoration-none'} do %>
     <h2 class="card-product-titles mt-3"><%= event.title %></h2>
-    <p class="mt-3">When:</em> <%= event.date %></p>
+      <div class="d-flex justify-content-between align-items-center">
+        <% @reservations.each do |reservation| %>
+        <p><strong>Guests:</strong> <%= event.reservations %>  |  <strong>Date:</strong> <%= event.start_time.to_formatted_s(:short) %></p>
+        <% if reservation.status == "pending" %>
+        <div>
+          <%= link_to "Accept", reservation_path(reservation, query: "accept"), method: :put, class: 'btn btn-sm btn-warning' %>
+          <%= link_to "Decline", reservation_path(reservation, query: "decline"), method: :put, class: 'btn btn-sm btn-danger' %>          </div>
+          <% else %>
+          <div class="p-1">
+            <% if reservation.status == 'accepted' %>
+              <p class="text-success"><%= reservation.status.capitalize %></p>
+            <% elsif reservation.status == 'declined' %>
+              <p class="text-danger"><%= reservation.status.capitalize %></p>
+            <% else %>
+              <p class="text-dark"><%= reservation.status.capitalize %></p>
+            <% end %>
+          </div>
+        <% end %>
+        <% end %>
+      </div>
+    <p class="mt-3">When:</em> <%= event.start_time.to_formatted_s(:short) %></p>
   </div>
 </div>
 <% end %>
