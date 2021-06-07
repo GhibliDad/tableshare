@@ -24,9 +24,13 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @chatroom = @event.chatroom
+    @messages = Message.where(chatroom_id: @chatroom)
+    @message = Message.new
     @reservation = Reservation.new
     authorize @event
     @attendees = @event.reservations
+    @guests = @attendees.map { |reser| reser.user }
     @host = @event.user
   end
 

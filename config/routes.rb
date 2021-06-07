@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :events, except: [:destroy] do
     resources :reservations, only: [:create] do
+      resources :messages, only: :create
       resources :reviews, only: [:new, :create]
     end
   #   resources :chatrooms, only: [:create]
