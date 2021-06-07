@@ -10,7 +10,7 @@
 <div class="container my-5">
   <div class="row">
     <div class="col-4">
-      <div class="p-3 mr-3 border">
+      <div class="card p-3 mr-3 border">
         <% if @host == current_user %>
           <p><strong>Host:</strong> You 😊</p>
         <% else %>
@@ -36,26 +36,27 @@
           <p><strong>Ingredients:</strong>
             <%= @event.ingredients %></p>
         </div>
+        <div class="col-12">
+          <p class="d-inline pr-3"><strong>Attendees: </strong></p>
+        <ul class="list-inline d-inline">
+          <% @attendees.each do |attendee| %>
+            <li class="list-inline-item">
+              <% guest = attendee.user %>
+              <p><%= cl_image_tag guest.photo.key, width:40, height:40, class: "card-home-user avatar-bordered" %></p>
+            </li>
+          <% end %>
+        </ul>
+      </div>
       </div>
       <% if @host != current_user %>
         <div class="row">
           <div class="col-12">
-            <button type="button" class="btn btn-outline-primary w-100 mt-4" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" class="btn btn-outline-warning w-100 mt-4" data-toggle="modal" data-target="#exampleModal">
               Make a reservation
             </button>
           </div>
         </div>
       <% end %>
-      <div>
-        <ul>
-          <% @attendees.each do |attendee| %>
-            <li>
-              <% guest = attendee.user %>
-              <p><%= guest.email %></p>
-            </li>
-          <% end %>
-        </ul>
-      </div>
     </div>
   </div>
 </div>
@@ -74,7 +75,7 @@
       <div class="modal-body">
         <%= simple_form_for([@event, @reservation]) do |f| %>
         <%= f.input :message %>
-        <%= f.submit 'Request reservation', class: 'btn btn-outline-primary' %>
+        <%= f.submit 'Request reservation', class: 'btn btn-outline-warning' %>
         <% end %>
       </div>
     </div>

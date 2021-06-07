@@ -2,5 +2,11 @@
   <div class="col-6 offset-3 p-5 text-center">
     <h1> Thanks for booking!</h1>
     <h2 class="m-3">A confirmation will be sent shortly 😊</h2>
+    <div class="row d-flex justify-content-center text-center my-5">
+      <div class="col-12">
+      <%= link_to "Back", event_path(@reservation.event), class: "btn btn-outline-warning" %>
+      </div>
+    </div>
   </div>
+
 </div>
