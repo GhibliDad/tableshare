@@ -116,13 +116,22 @@
 <% @user.reservations_as_host.each do |reservation|%>
   <% if reservation.reviews %>
     <% reservation.reviews.each do |review| %>
-      <div>
-        <h4><%= review.heading %></h4>
-        <p><%= review.content %></p>
-        <p>Food rating: <strong><%= review.food_rating %></strong></p>
-        <p>Host rating: <strong><%= review.host_rating %></strong></p>
-        <p>Vibe rating: <strong><%= review.vibe_rating %></strong></p>
-        <p><strong> TOTAL RATING: <%= review.total_rating %></strong></p>
+      <div class="card-review p-3 mb-5 mx-auto" style="width: 720px">
+        <div class="py-4">
+          <h4><strong><%= link_to review.heading, event_path(review), class: "text-warning" %></strong></h4>
+        </div>
+        <div>
+          <p><%= review.content %></p>
+        </div>
+        <div>
+          <p>Food rating: <strong><%= review.food_rating %></strong>/5</p>
+          <p>Host rating: <strong><%= review.host_rating %></strong>/5</p>
+          <p>Vibe rating: <strong><%= review.vibe_rating %></strong>/5</p>
+          <p><strong> TOTAL RATING: <%= review.total_rating %></strong></p>
+        </div>
+        <div class="d-flex justify-content-around">
+          <%= cl_image_tag review.photo.key, width: 700 %>
+        </div>
       </div>
     <% end %>
   <% end %>
