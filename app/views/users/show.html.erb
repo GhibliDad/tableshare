@@ -44,6 +44,7 @@
   <img src="https://source.unsplash.com/random?food" alt="a picture of food" class="cards-reservation"/>
     <div class="card-product-infos">
       <img src="https://source.unsplash.com/random?person" style="width:40px; height:40px;" class="avatar-bordered mt-0 mb-2 img-fluid" />
+      <small class="ml-1"><%= reservation.user.first_name %> <%= reservation.user.last_name %></small>
     <%= link_to event_path, {class: 'text-decoration-none'} do %>
       <h2 class="card-product-titles mt-2"><%= reservation.event.title %></h2>
       <p class="mt-2 position-absolute bottom-0"><em class="text-warning">Where:</em> <%= reservation.event.address.truncate(40) %> <br><em class="text-warning">When:</em> <%= reservation.event.start_time.to_formatted_s(:short) %></p>
@@ -58,7 +59,6 @@
               <p class="text-dark"><i class="product-info-icons far fa-clock text-warning"> </i> <%= reservation.status.capitalize %></p><br>
             <% end %>
           <% end %>
-
           <% if reservation.event.end_time < DateTime.now %>
             <% unless reservation.reviews.size.positive? %>
             <div class="btn btn-outline-warning"><%= link_to "Leave Review", new_event_reservation_review_path(reservation.event, reservation) %>
@@ -79,12 +79,11 @@
 <div class="card-product p-3 mb-5 mx-auto" style="width: 720px">
   <img src="https://source.unsplash.com/random?food" alt="a picture of food" class="cards-reservation"/>
   <div class="card-product-infos">
-    <img src="https://source.unsplash.com/random?person" style="width:40px; height:40px;" class="avatar-bordered mt-0 mb-2 img-fluid" />
     <%= link_to event_path, {class: 'text-decoration-none'} do %>
     <h2 class="card-product-titles mt-3"><%= event.title %></h2>
       <div class="d-flex justify-content-between align-items-center">
         <% event.reservations.each do |reservation| %>
-        <p><strong>Guests:</strong> <%= reservation.user.first_name %>  |  <strong>Date:</strong> <%= event.start_time.to_formatted_s(:short) %></p>
+        <p><strong>Guests:</strong> <%= reservation.user.first_name %>
         <% if reservation.status == "pending" %>
         <div>
           <%= link_to "Accept", "/reservations/#{reservation.id}/accept", class: 'btn btn-sm btn-warning' %>
@@ -103,7 +102,6 @@
         <% end %>
         <% end %>
       </div>
-    <p class="mt-3">When:</em> <%= event.start_time.to_formatted_s(:short) %></p>
   </div>
 </div>
 <% end %>
