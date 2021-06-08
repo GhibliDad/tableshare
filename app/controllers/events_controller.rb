@@ -1,11 +1,19 @@
 class EventsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
-    @events = policy_scope(Event).order(created_at: :desc)
+    # SORRY FOR THE MOST MESSY CODE EVER...
+    @events = policy_scope(Event).order(start_time: :desc)
     search = params[:search]
-    if search[:address]
-      @location = Geocoder.search(search[:address]).first
-      @tables = Event.near(@location.coordinates, 10, units: :km)
+    if search[:address].empty? && search[:date1].empty?
+      @events = Event.all
+      @coordinates = @events.geocoded.map do |event|
+        {
+          lat: event.latitude,
+          lng: event.longitude
+        }
+      end
+    elsif search[:address].empty?
+      @tables = Event.all
       date1 = search[:date1].split('to').first.strip
       date2 = search[:date1].split('to').last.strip
       @events = @tables.where("date(start_time) >= ? AND date(start_time) <= ?", date1, date2)
@@ -15,7 +23,21 @@ class EventsController < ApplicationController
           lng: event.longitude
         }
       end
+    elsif search[:date1].empty?
+      @location = Geocoder.search(search[:address]).first
+      @events = Event.near(@location.coordinates, 10, units: :km)
+      @coordinates = @events.geocoded.map do |event|
+        {
+          lat: event.latitude,
+          lng: event.longitude
+        }
+      end
     else
+      @location = Geocoder.search(search[:address]).first
+      @tables = Event.near(@location.coordinates, 10, units: :km)
+      date1 = search[:date1].split('to').first.strip
+      date2 = search[:date1].split('to').last.strip
+      @events = @tables.where("date(start_time) >= ? AND date(start_time) <= ?", date1, date2)
       @coordinates = @events.geocoded.map do |event|
         {
           lat: event.latitude,

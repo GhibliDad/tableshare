@@ -11,9 +11,9 @@
 <div class="container">
   <div class="search">
     <%= simple_form_for :search, url: events_path, method: "GET", html: { class: 'form-inline' } do |f| %>
-      <%= f.input :address, required: false, label: false, placeholder: 'Address' %>
-      <%= f.input :date1, required: false, label: false, placeholder: "Start date", input_html: {id: 'range_start'} %>
-      <%= f.input :date2, required: false, label: false, placeholder: "End date", input_html: {id: 'range_end'} %>
+      <%= f.input :address, required: true, label: false, placeholder: 'Address' %>
+      <%= f.input :date1, required: true, label: false, placeholder: "Start date", input_html: {id: 'range_start'} %>
+      <%= f.input :date2, label: false, placeholder: "End date", input_html: {id: 'range_end'} %>
       <%= f.button :submit, 'Search!', class: 'btn btn-warning text-white' %>
     <% end %>
   </div>
