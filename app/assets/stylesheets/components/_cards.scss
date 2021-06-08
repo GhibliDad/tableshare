@@ -98,16 +98,11 @@
   color: white;
 }
 
-
-// cards my tables
-
-// .cards-tables-invites {
-//   display: flex;
-//   justify-content: space-around;
-//   flex-wrap: wrap;
-// }
-
-
-
-
-
+.card-review {
+  overflow: hidden;
+  height: 100%;
+  background: #FFFAF3;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  //align-items: center;
+}

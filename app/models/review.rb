@@ -4,6 +4,6 @@ class Review < ApplicationRecord
 
   has_one_attached :photo
 
-  validates :heading, length: { maximum: 20 }
-  validates :content, length: { maximum: 250 }
+  validates :heading, length: { maximum: 50 }
+  validates :content, length: { maximum: 500 }
 end

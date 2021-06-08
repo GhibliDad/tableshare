@@ -54,13 +54,15 @@ var scrolled = false;
 import { initMapbox } from '../plugins/init_mapbox';
 import { initAutocomplete } from '../plugins/init_autocomplete';
 import { initChatroomCable } from '../channels/chatroom_channel';
-
+import { initFlatpickr } from '../plugins/flatpickr';
 
 document.addEventListener('turbolinks:load', () => {
-  initAutocomplete();
   initMapbox();
   initChatroomCable();
   updateScroll();
+  initFlatpickr();
+  initAutocomplete();
+
   // setInterval(updateScroll,1000);
 });
 
