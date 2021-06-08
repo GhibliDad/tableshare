@@ -4,7 +4,7 @@ class EventsController < ApplicationController
     # SORRY FOR THE MOST MESSY CODE EVER...
     @events = policy_scope(Event).order(start_time: :desc)
     search = params[:search]
-    if search[:address].empty? && search[:date1].empty?
+    if search.nil? || search[:address].empty? && search[:date1].empty?
       @events = Event.all
       @coordinates = @events.geocoded.map do |event|
         {
