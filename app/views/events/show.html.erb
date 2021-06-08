@@ -82,6 +82,7 @@
             <% end %>
           <% end %>
           </div>
+        </div>
         <%= simple_form_for [@event, @message], remote: true do |f| %>
           <%= f.input :message, label: false, placeholder: "Let the host know about any allergies" %>
           <%= f.submit "Send", class: 'w-100 btn btn-outline-warning' %>
@@ -114,7 +115,6 @@
 </div>
 
 <!-- Event Reviews -->
-
 <% if @event.end_time < DateTime.now %>
  <% @event.reservations.each do |reservation| %>
   <% reservation.reviews.each do |review| %>
