@@ -81,6 +81,7 @@
              <%= render '/messages/message', message: message %>
             <% end %>
           <% end %>
+          </div>
         </div>
         <%= simple_form_for [@event, @message], remote: true do |f| %>
           <%= f.input :message, label: false, placeholder: "Let the host know about any allergies" %>
