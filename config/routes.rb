@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   get "/reservations/:id/accept", to: "reservations#accept"
   get "/reservations/:id/decline", to: "reservations#decline"
-  get "/dashboard", to: "pages#dashboard"
+  get "/dashboards/:id", to: "dashboards#show"
+  patch "/dashboards/:id", to: "dashboards#update"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   resources :events, except: [:destroy] do

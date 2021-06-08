@@ -74,7 +74,8 @@
 }
 
 .card-product {
-  position: relative;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .attendance-info {
@@ -105,4 +106,3 @@
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   //align-items: center;
 }
-
