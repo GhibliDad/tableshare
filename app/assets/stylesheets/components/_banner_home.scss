@@ -14,3 +14,15 @@
   color: white;
   font-size: 88px;
 }
+
+.show-banner {
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+    h2 {
+      padding: 250px 100px 120px;
+      font-size: 40px;
+      font-weight: 700;
+      text-shadow: 1px 1px rgba(200,200,200, 0.4);
+    }
+}
