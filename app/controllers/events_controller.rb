@@ -32,8 +32,14 @@ class EventsController < ApplicationController
     @message = Message.new
     @reservation = Reservation.new
     authorize @event
-    @attendees = @event.reservations
-    @guests = @attendees.map { |reser| reser.user }
+    @attendees = @event.reservations.where(status: 'accepted')
+    @pending = @event.reservations.where(status: 'pending')
+    @guests = @attendees.map do |reser|
+      reser.user if reser.status == 'accepted'
+    end
+    @pending_guests = @pending.map do |reser|
+      reser.user if reser.status == 'pending'
+    end
     @host = @event.user
   end
 
