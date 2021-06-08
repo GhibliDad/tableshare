@@ -108,3 +108,22 @@
     </div>
   <% end %>
 <% end %>
+
+<% console %>
+
+<h2 id="tables" class="text-center my-5"><i class="fas fa-utensils mx-2 text-warning"></i> <strong>My Reviews</strong></h2>
+
+<% @user.reservations_as_host.each do |reservation|%>
+  <% if reservation.reviews %>
+    <% reservation.reviews.each do |review| %>
+      <div>
+        <h4><%= review.heading %></h4>
+        <p><%= review.content %></p>
+        <p>Food rating: <strong><%= review.food_rating %></strong></p>
+        <p>Host rating: <strong><%= review.host_rating %></strong></p>
+        <p>Vibe rating: <strong><%= review.vibe_rating %></strong></p>
+        <p><strong> TOTAL RATING: <%= review.total_rating %></strong></p>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
