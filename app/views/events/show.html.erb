@@ -24,9 +24,17 @@
       <% if @host != current_user %>
         <div class="row">
           <div class="col-12">
-            <button type="button" class="btn btn-warning w-100 mt-4 text-white" data-toggle="modal" data-target="#exampleModal">
-              Make a reservation
-            </button>
+            <% if  @pending_guests.include?(current_user) %>
+              <button disabled type="button" id="reservation-btn" class="btn btn-warning w-100 mt-4 text-white" data-toggle="modal" data-target="#exampleModal">
+                Pending
+              </button>
+            <% elsif @guests.include?(current_user)  %>
+              <div></div>
+            <% else %>
+              <button type="button" id="reservation-btn" class="btn btn-warning w-100 mt-4 text-white" data-toggle="modal" data-target="#exampleModal">
+                Make a reservation
+              </button>
+            <% end %>
           </div>
         </div>
       <% end %>
@@ -62,7 +70,7 @@
         </div>
       </div>
     </div>
-    <% if @guests.include?(current_user) %>
+    <% if @guests.include?(current_user) || @event.user == current_user %>
     <div class="col-4">
       <div class="chat">
         <div id="messages_box" data-user="<%= current_user.id %>" data-chatroom-id="<%= @event.chatroom.id %>">
@@ -75,7 +83,7 @@
           <% end %>
         </div>
         <%= simple_form_for [@event, @message], remote: true do |f| %>
-          <%= f.input :message, label: false, placeholder: "Message" %>
+          <%= f.input :message, label: false, placeholder: "Let the host know about any allergies" %>
           <%= f.submit "Send", class: 'w-100 btn btn-outline-warning' %>
         <% end %>
       </div>
@@ -84,6 +92,7 @@
   </div>
 </div>
 </div>
+<%= console %>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -98,7 +107,7 @@
       <div class="modal-body">
         <%= simple_form_for([@event, @reservation]) do |f| %>
         <%= f.input :message %>
-        <%= f.submit 'Request reservation', class: 'btn btn-outline-warning' %>
+        <%= f.submit 'Request reservation', input_html: { id: "request-btn" }, class: 'btn btn-outline-warning' %>
         <% end %>
       </div>
     </div>
