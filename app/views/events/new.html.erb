@@ -4,7 +4,7 @@
       <h2 class="mb-5 text-center text-warning"><strong>Create a new Table!</strong></h2>
         <%= simple_form_for @event do |f| %>
         <%= f.input :title %>
-        <%= f.input :address, input_html: { id: 'address'} %>
+        <%= f.input :address, input_html: { id: 'search_address'} %>
         <% f.input :date %>
         <%= f.input :start_time %>
         <%= f.input :end_time %>
