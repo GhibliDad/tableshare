@@ -53,7 +53,7 @@
                       <p><strong><%= event.user.email %></strong></p>
                     <% end %>
                     <div class="d-flex">
-                      <p><%= event.start_time.to_formatted_s(:short)  %></p>
+                      <p><%= event.start_time.strftime("%A, %e %B - %I:%M%p")%> </p>
                       <p class="pl-3">€ <%= event.price %></p>
                     </div>
                   </div>

@@ -18,8 +18,10 @@
         <% end %>
         <p><strong>Price:</strong> <%= @event.price %> €</p>
         <p><strong>Available seats: </strong> <%= @event.available_seats %></p>
+        <p><strong>Date: </strong>
+        <%= @event.start_time.strftime("%A, %e %B")%> </p>
         <p><strong>Time: </strong>
-        <%= @event.start_time.to_formatted_s(:short) %> </p>
+        <%= @event.start_time.strftime("%H:%M")%> </p>
       </div>
       <% if @host != current_user && @event.end_time > DateTime.now %>
         <div class="row">
