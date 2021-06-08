@@ -5,7 +5,6 @@
   background-position: center;
   width: 100%;
   height: 600px;
-
   border: 16px solid #FF9000;
 }
 
@@ -14,4 +13,16 @@
   text-shadow: 2px 2px #CF5830;
   color: white;
   font-size: 88px;
+}
+
+.show-banner {
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+    h2 {
+      padding: 250px 100px 120px;
+      font-size: 40px;
+      font-weight: 700;
+      text-shadow: 1px 1px rgba(200,200,200, 0.4);
+    }
 }
