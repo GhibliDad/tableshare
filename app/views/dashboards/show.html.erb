@@ -40,10 +40,18 @@
 
 <% @reservations.each do |reservation| %>
   <div class="card-product p-3 mb-3 mx-auto" style="width: 720px">
-  <img src="https://source.unsplash.com/random?food" alt="a picture of food" class="cards-reservation"/>
+    <% if reservation.event.photo.attached? %>
+      <%= cl_image_tag reservation.event.photo.key, class: "cards-reservation" %>
+    <% else %>
+      <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802286/tableshare/placeholder_pykjcu.jpg', class: "cards-reservation")%>
+    <% end %>
     <div class="card-product-infos">
-      <img src="https://source.unsplash.com/random?person" style="width:40px; height:40px;" class="avatar-bordered mt-0 mb-2 img-fluid" />
-        <small class="ml-1"><%= reservation.event.user.first_name %> <%= reservation.event.user.last_name %></small>
+      <% if reservation.event.user.photo.attached? %>
+        <%= cl_image_tag reservation.event.user.photo.key, class: "avatar-bordered" %>
+      <% else %>
+        <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', class: "avatar-bordered")%>
+      <% end %>
+      <small class="ml-1"><%= reservation.event.user.first_name %> <%= reservation.event.user.last_name %></small>
         <%= link_to event_path(reservation), {class: 'text-decoration-none'} do %>
         <h2 class="card-product-titles mt-2"><%= reservation.event.title %></h2>
         <p class="mt-2 position-absolute bottom-0"><em class="text-warning">Where:</em> <%= reservation.event.address.truncate(40) %> <br><em class="text-warning">When:</em> <%= reservation.event.start_time.to_formatted_s(:short) %></p>
@@ -78,7 +86,11 @@
   <div class="card-product p-3 mb-5 mx-auto" style="width: 720px; height:100%;">
     <div class="d-flex">
       <div class="d-flex">
-        <img src="https://source.unsplash.com/random?food" alt="a picture of food" class="cards-reservation"/>
+        <% if event.photo.attached? %>
+          <%= cl_image_tag event.photo.key, class: "cards-reservation" %>
+        <% else %>
+          <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802286/tableshare/placeholder_pykjcu.jpg', class: "cards-reservation")%>
+        <% end %>
         <div class="card-product-infos">
           <%= link_to event_path, {class: 'text-decoration-none'} do %>
             <h2 class="card-product-titles mt-0 mb-2"><strong><%= event.title %></h2></strong>
