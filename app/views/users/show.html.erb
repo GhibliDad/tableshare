@@ -5,7 +5,7 @@
   </h2>
   <div class="d-flex justify-content-center mb-5">
     <% if @user.photo.attached? %>
-      <%= cl_image_tag @user.photo.key, width: 120, height: 120, crop: :thumb, radius: 'max' %>
+      <%= cl_image_tag @user.photo.key, width: 120, height: 120, class: 'avatar-large' %>
     <% else %>
      <%= image_tag "https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png", width: 160, height: 160, radius: 'max' %>
     <% end %>
