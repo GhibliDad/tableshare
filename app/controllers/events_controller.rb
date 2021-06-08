@@ -2,10 +2,13 @@ class EventsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     @events = policy_scope(Event).order(created_at: :desc)
-    if params[:address]
-      @location = Geocoder.search(params[:address]).first
+    search = params[:search]
+    if search[:address]
+      @location = Geocoder.search(search[:address]).first
       @tables = Event.near(@location.coordinates, 10, units: :km)
-      @events = @tables.where("date(start_time) >= ? AND date(start_time) <= ?", params[:date1], params[:date2])
+      date1 = search[:date1].split('to').first.strip
+      date2 = search[:date1].split('to').last.strip
+      @events = @tables.where("date(start_time) >= ? AND date(start_time) <= ?", date1, date2)
       @coordinates = @events.geocoded.map do |event|
         {
           lat: event.latitude,
@@ -29,8 +32,14 @@ class EventsController < ApplicationController
     @message = Message.new
     @reservation = Reservation.new
     authorize @event
-    @attendees = @event.reservations
-    @guests = @attendees.map { |reser| reser.user }
+    @attendees = @event.reservations.where(status: 'accepted')
+    @pending = @event.reservations.where(status: 'pending')
+    @guests = @attendees.map do |reser|
+      reser.user if reser.status == 'accepted'
+    end
+    @pending_guests = @pending.map do |reser|
+      reser.user if reser.status == 'pending'
+    end
     @host = @event.user
   end
 
