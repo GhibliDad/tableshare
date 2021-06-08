@@ -114,9 +114,6 @@
 </div>
 
 <!-- Event Reviews -->
-
-<% console %>
-
 <% if @event.end_time < DateTime.now %>
  <% @event.reservations.each do |reservation| %>
   <% reservation.reviews.each do |review| %>
