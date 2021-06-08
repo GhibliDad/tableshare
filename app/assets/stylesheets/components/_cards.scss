@@ -74,7 +74,8 @@
 }
 
 .card-product {
-  position: relative;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .attendance-info {
@@ -100,9 +101,13 @@
 
 // cards my tables
 
-.edit-event {
-  position: absolute;
-  top: 64px;
-  right: 60px;
-  text-align: center;
-}
+// .cards-tables-invites {
+//   display: flex;
+//   justify-content: space-around;
+//   flex-wrap: wrap;
+// }
+
+
+
+
+

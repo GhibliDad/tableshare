@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "/reservations/:id/accept", to: "reservations#accept"
   get "/reservations/:id/decline", to: "reservations#decline"
   get "/dashboards/:id", to: "dashboards#show"
+  patch "/dashboards/:id", to: "dashboards#update"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   resources :events, except: [:destroy] do
