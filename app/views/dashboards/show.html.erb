@@ -54,7 +54,8 @@
       <small class="ml-1"><%= reservation.event.user.first_name %> <%= reservation.event.user.last_name %></small>
         <%= link_to event_path(reservation), {class: 'text-decoration-none'} do %>
         <h2 class="card-product-titles mt-2"><%= reservation.event.title %></h2>
-        <p class="mt-2 position-absolute bottom-0"><em class="text-warning">Where:</em> <%= reservation.event.address.truncate(40) %> <br><em class="text-warning">When:</em> <%= reservation.event.start_time.to_formatted_s(:short) %></p>
+        <p class="mt-2 position-absolute bottom-0"><em class="text-warning">Where:</em> <%= reservation.event.address.truncate(40) %>
+          <br><em class="text-warning">When:</em> <%= reservation.event.start_time.strftime("%A, %e %B - %H:%M")%></p>
       <div class="attendance-info border-attendance-info">
         <% if reservation.event.end_time > DateTime.now %>
           <p class="d-inline">Status: </p><br>
@@ -95,7 +96,7 @@
           <%= link_to event_path, {class: 'text-decoration-none'} do %>
             <h2 class="card-product-titles mt-0 mb-2"><strong><%= event.title %></h2></strong>
           <% end %>
-          <h3 class="text-secondary"><%= event.start_time.to_formatted_s(:short) %></h3>
+          <h3 class="text-secondary"><%= event.start_time.strftime("%A, %e %B - %H:%M")%></h3>
           <small class="text-secondary"><%= event.address.truncate(35) %></small><br>
             <button type="button" class="btn btn-outline-warning mt-3" data-toggle="modal" data-target="#exampleModal">
             Pending Invites
