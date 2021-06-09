@@ -8,36 +8,38 @@
               <h2>Tables near you </h2>
             </div>
             <% @events.each do |event| %>
-              <%= link_to event_path(event), {class: 'text-decoration-none'} do %>
-                <div class="card-product p-3">
-                  <% if event.photo.attached? %>
-                    <%= cl_image_tag event.photo.key, class: "card-product-img" %>
-                  <% else %>
-                    <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802286/tableshare/placeholder_pykjcu.jpg', class: "card-product-img") %>
-                  <% end %>
-                  <div class="card-product-infos w-100">
-                    <div class="d-flex justify-content-between">
-                      <div class="d-flex justify-content-left">
-                       <% if event.user.photo.attached? %>
-                          <%= cl_image_tag event.user.photo.key, width:40, height:40, class: "card-home-user avatar-bordered" %>
-                        <% else %>
-                          <%= cl_image_tag 'https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width: 40, height: 40, class: "card-home-user avatar-bordered" %>
-                        <% end %>
-                        <% if event.user.first_name %>
-                          <p class="ml-2"><strong><%= event.user.first_name %></strong></p>
-                        <% else %>
-                          <p class="ml-2"><strong><%= event.user.email %></strong></p>
-                        <% end %>
+              <% unless event.start_time.past? %>
+                <%= link_to event_path(event), {class: 'text-decoration-none'} do %>
+                  <div class="card-product p-3">
+                    <% if event.photo.attached? %>
+                      <%= cl_image_tag event.photo.key, class: "card-product-img" %>
+                    <% else %>
+                      <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802286/tableshare/placeholder_pykjcu.jpg', class: "card-product-img") %>
+                    <% end %>
+                    <div class="card-product-infos w-100">
+                      <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-left">
+                         <% if event.user.photo.attached? %>
+                            <%= cl_image_tag event.user.photo.key, width:40, height:40, class: "card-home-user avatar-bordered" %>
+                          <% else %>
+                            <%= cl_image_tag 'https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width: 40, height: 40, class: "card-home-user avatar-bordered" %>
+                          <% end %>
+                          <% if event.user.first_name %>
+                            <p class="ml-2"><strong><%= event.user.first_name %></strong></p>
+                          <% else %>
+                            <p class="ml-2"><strong><%= event.user.email %></strong></p>
+                          <% end %>
+                        </div>
+                        <p>€ <%= event.price %></p>
                       </div>
-                      <p>€ <%= event.price %></p>
-                    </div>
-                    <div>
-                      <h3 class="mt-2"><%= event.title %></h3>
-                      <p><%= event.description.truncate(150) %></p>
-                      <p class="mt-3"><%= event.start_time.strftime("%A, %e %B - %H:%M")%> </p>
+                      <div>
+                        <h3 class="mt-2"><%= event.title %></h3>
+                        <p><%= event.description.truncate(150) %></p>
+                        <p class="mt-3"><%= event.start_time.strftime("%A, %e %B - %H:%M")%> </p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                <% end %>
               <% end %>
             <% end %>
           </div>

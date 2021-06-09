@@ -25,6 +25,7 @@
   <div class="row justify-content-around">
     <div class="cards">
       <% @events.each do |event| %>
+      <% unless event.start_time.past? %>
         <%= link_to event_path(event), {class: 'text-decoration-none'} do %>
           <div class="card-home p-3">
             <% if event.photo.attached? %>
@@ -61,6 +62,7 @@
               </div>
             </div>
           </div>
+          <% end %>
         <% end %>
       <% end %>
     </div>
