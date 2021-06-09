@@ -10,7 +10,7 @@
 <div class="container my-5">
   <div class="row">
     <div class="col-3">
-      <div class="card p-3 border">
+      <div class="card card-show p-3">
         <% if @host == current_user %>
           <p><strong>Host:</strong> You 😊</p>
         <% else %>
@@ -77,7 +77,7 @@
     <% if @guests.include?(current_user) || @event.user == current_user %>
     <div class="col-4">
       <div class="chat">
-        <div id="messages_box" data-user="<%= current_user.id %>" data-chatroom-id="<%= @event.chatroom.id %>">
+        <div class="mb-2" id="messages_box" data-user="<%= current_user.id %>" data-chatroom-id="<%= @event.chatroom.id %>">
           <% if @messages.empty? %>
             <div></div>
           <% else %>
@@ -86,7 +86,6 @@
             <% end %>
           <% end %>
           </div>
-        </div>
         <%= simple_form_for [@event, @message], remote: true do |f| %>
           <%= f.input :message, label: false, placeholder: "Message" %>
           <%= f.submit "Send", class: 'w-100 btn btn-outline-warning' %>
