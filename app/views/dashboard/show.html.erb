@@ -1,4 +1,7 @@
-<div class="row secondary_navbar d-flex justify-content-around align-items-center text-left">
+<!-- navbar -->
+  <!-- navlinks -->
+
+<div class="tab row d-flex justify-content-around align-items-center text-center">
   <div class="col-2 m-auto">
     <% if current_user.first_name && current_user.last_name %>
       <p class="my-0 text-warning">Welcome<strong> <%= current_user.first_name.capitalize %>!</strong></p>
@@ -6,38 +9,44 @@
       <p class="my-0"><strong><%= current_user.email %></strong></p>
     <% end %>
   </div>
-    <div class="col-2 m-auto text-warning"><i class="far fa-user-circle mx-2"></i><%= link_to "Edit profile", "#edit" %></div>
-    <div class="col-2 m-auto text-warning"><i class="far fa-list-alt mx-2"></i><%= link_to "My Reservations", "#reservations" %></div>
-    <div class="col-2 m-auto text-warning"><i class="fas fa-utensils mx-2"></i><%= link_to "My Tables", "#tables" %></div>
+    <button class="tablinks col-2 m-auto" onclick="navTabs(event, 'Edit')" id="defaultOpen"><i class="far fa-user-circle mx-2 text-warning"></i>Edit profile</button>
+    <button class="tablinks col-2 m-auto" onclick="navTabs(event, 'Reservations')"><i class="far fa-list-alt mx-2 text-warning"></i>My Reservations</button>
+    <button class="tablinks col-2 m-auto" onclick="navTabs(event, 'Tables')"><i class="fas fa-utensils mx-2 text-warning"></i>My Tables</button>
 </div>
 
-<div class="my-5">
-  <h2 id="edit" class="text-center mb-5"><i class="far fa-user-circle mx-2 text-warning"></i> <strong>Edit Profile</strong></h2>
-  <div class="d-flex justify-content-center mb-5">
-    <% if current_user.photo.attached? %>
-      <%= cl_image_tag current_user.photo.key, width: 120, height: 120, class: 'avatar-large' %>
-    <% else %>
-     <%= image_tag "https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png", width: 120, height: 120, class: 'avatar-large'  %>
-    <% end %>
-  </div>
-  <div class="row justify-content-around align-items-center">
-    <div class="col-5">
-      <%= simple_form_for(current_user, method: :patch, url: "/dashboard") do |f| %>
-      <%= f.input :username %>
-      <%= f.input :first_name %>
-      <%= f.input :last_name %>
-      <%= f.input :about, as: :text %>
-      <%= f.input :address %>
-      <%= f.input :phone_number %>
-      <%= f.input :photo, as: :file, input_html: { class: 'd-none'}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo' %>
-      <%= f.submit 'Edit', class: 'btn btn-warning w-100'%>
+<!-- edit profile form -->
+
+<div id="Edit" class="tabcontent">
+  <div class="my-5">
+    <h2 id="edit" class="text-center mb-5"><i class="far fa-user-circle mx-2 text-warning"></i> <strong>Edit Profile</strong></h2>
+    <div class="d-flex justify-content-center mb-5">
+      <% if current_user.photo.attached? %>
+        <%= cl_image_tag current_user.photo.key, width: 120, height: 120, class: 'avatar-large' %>
+      <% else %>
+       <%= image_tag "https://res.cloudinary.com/dxiatpprs/image/upload/v1622037671/Mask_Group_1_agdpry.png", width: 120, height: 120, radius: 'max' %>
       <% end %>
+    </div>
+    <div class="row justify-content-around align-items-center">
+      <div class="col-5">
+        <%= simple_form_for(current_user, method: :patch, url: "/dashboard") do |f| %>
+        <%= f.input :username %>
+        <%= f.input :first_name %>
+        <%= f.input :last_name %>
+        <%= f.input :about, as: :text %>
+        <%= f.input :address %>
+        <%= f.input :phone_number %>
+        <%= f.input :photo, as: :file, input_html: { class: 'd-none'}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo' %>
+        <%= f.submit 'Edit', class: 'btn btn-warning w-100'%>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
 
-<h2 id="reservations"class="text-center mb-5"><i class="far fa-list-alt mx-2 text-warning"></i> <strong>My Reservations</strong></h2>
+<!-- my reservations -->
 
+<div id="Reservations" class="tabcontent mb-4">
+  <h2 id="reservations"class="text-center my-5"><i class="far fa-list-alt mx-2 text-warning"></i> <strong>My Reservations</strong></h2>
 <% @reservations.each do |reservation| %>
   <div class="card-product p-3 mb-3 mx-auto" style="width: 720px">
     <% if reservation.event.photo.attached? %>
@@ -80,9 +89,12 @@
 <% end %>
 </div>
 </div>
+</div>
 
-<h2 id="tables" class="text-center my-5"><i class="fas fa-utensils mx-2 text-warning"></i> <strong>My Tables</strong></h2>
+<!-- my tables -->
 
+<div id="Tables" class="tabcontent">
+  <h2 id="tables" class="text-center my-5"><i class="fas fa-utensils mx-2 text-warning"></i> <strong>My Tables</strong></h2>
 <% @events.each do |event| %>
   <div class="card-product p-3 mb-5 mx-auto" style="width: 720px; height:100%;">
     <div class="d-flex">
@@ -171,3 +183,4 @@
     </div>
   </div>
 <% end %>
+</div>
