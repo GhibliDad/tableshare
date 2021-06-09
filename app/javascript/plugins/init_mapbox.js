@@ -20,9 +20,17 @@ const initMapbox = () => {
 
     const markers = JSON.parse(mapElement.dataset.markers);
     markers.forEach((marker) => {
-      new mapboxgl.Marker()
+      const element = document.createElement('div');
+      element.className = 'marker';
+      element.id = 'event_' + marker.event_id;
+      element.style.backgroundSize = 'contain';
+      element.style.width = '25px';
+      element.style.height = '25px';
+      const popup = new mapboxgl.Popup().setHTML(marker.info_window);
+      new mapboxgl.Marker(element)
       .setLngLat([ marker.lng, marker.lat ])
-      .addTo(map);
+      .setPopup(popup)
+      .addTo(map)
     });
 
    fitMapToMarkers(map, markers);

@@ -1,0 +1,18 @@
+.mapboxgl-popup {
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.marker {
+  background: pink;
+}
+
+.card-product.selected {
+  // box-shadow:         3px 3px 5px 6px #ccc;
+  background-color: orange;
+  transition: all ease 0.7s;
+}

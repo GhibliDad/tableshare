@@ -10,7 +10,7 @@
             <% @events.each do |event| %>
               <% unless event.start_time.past? %>
                 <%= link_to event_path(event), {class: 'text-decoration-none'} do %>
-                  <div class="card-product p-3">
+                  <div class="card-product p-3" id="card_event_<%= event.id %>">
                     <% if event.photo.attached? %>
                       <%= cl_image_tag event.photo.key, class: "card-product-img" %>
                     <% else %>
