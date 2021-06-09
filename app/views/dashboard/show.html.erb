@@ -144,9 +144,7 @@
                       </button>
                     </div>
                     <div class="modal-body">
-                      <% raise %>
                       <% if reservation.status == "pending" %>
-
                       <div class="text-center">
                           <div class="img avatar-bordered ml-4">
                             <% if reservation.user.photo.attached? %>
@@ -159,7 +157,7 @@
                         </div>
                       </div>
                       <div>
-                        <%= link_to "Accept", "/reservations/#{reservation.id}/accept", class: 'btn btn-sm btn-warning' %>
+                        <%= link_to "Accept", "/reservations/#{reservation.id}/accept", class: 'product-info-icons fas fa-check text-warning text-success' %>
                         <%= link_to "Decline", "/reservations/#{reservation.id}/decline", class: 'btn btn-sm btn-danger' %>
                       </div>
                       <% elsif reservation.status == "declined" %>
