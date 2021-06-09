@@ -1,0 +1,20 @@
+.mapboxgl-popup {
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.marker {
+  background: orange;
+  border-radius: 50%;
+  // background-image: url('/images/map_marker_logo.png');
+}
+
+.card-product.selected {
+  // box-shadow:         3px 3px 5px 6px #ccc;
+  background-color: orange;
+  transition: all ease 0.5s;
+}

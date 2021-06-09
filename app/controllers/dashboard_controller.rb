@@ -1,10 +1,15 @@
 class DashboardController < ApplicationController
   def show
     @user = current_user
-    @reservations = Reservation.where(user_id: @user)
+    @reservations = @user.reservations
+    @pastReservations = @reservations.select do |reservation|
+      reservation.event.end_time.past?
+    end
+    @reservations = @reservations.select do |reservation|
+      reservation.event.end_time.future?
+    end
     @events = Event.where(user_id: @user)
     authorize @user
-    @reservations = @user.reservations
   end
 
   def edit

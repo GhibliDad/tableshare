@@ -51,6 +51,7 @@ var scrolled = false;
   };
 
 import { navTabs } from '../navbar/navbar_tabs' ;
+import { mapHighlights } from '../map/map_highlight' ;
 
 import { initMapbox } from '../plugins/init_mapbox';
 import { initAutocomplete } from '../plugins/init_autocomplete';
@@ -63,7 +64,7 @@ document.addEventListener('turbolinks:load', () => {
   updateScroll();
   initFlatpickr();
   initAutocomplete();
-
+  mapHighlights()
   // setInterval(updateScroll,1000);
 });
 

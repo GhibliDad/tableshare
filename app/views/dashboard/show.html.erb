@@ -15,83 +15,104 @@
 </div>
 
 <!-- edit profile form -->
-
-<div id="Edit" class="tabcontent">
-  <div class="my-5">
-    <h2 id="edit" class="text-center mb-5"><i class="far fa-user-circle mx-2 text-warning"></i> <strong>Edit Profile</strong></h2>
-    <div class="d-flex justify-content-center mb-5">
-      <% if current_user.photo.attached? %>
-        <%= cl_image_tag current_user.photo.key, width: 120, height: 120, class: 'avatar-large' %>
-      <% else %>
-       <%= image_tag "https://res.cloudinary.com/dxiatpprs/image/upload/v1622037671/Mask_Group_1_agdpry.png", width: 120, height: 120, radius: 'max' %>
-      <% end %>
-    </div>
-    <div class="row justify-content-around align-items-center">
-      <div class="col-5">
-        <%= simple_form_for(current_user, method: :patch, url: "/dashboard") do |f| %>
-        <%= f.input :username %>
-        <%= f.input :first_name %>
-        <%= f.input :last_name %>
-        <%= f.input :about, as: :text %>
-        <%= f.input :address %>
-        <%= f.input :phone_number %>
-        <%= f.input :photo, as: :file, input_html: { class: 'd-none'}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo' %>
-        <%= f.submit 'Edit', class: 'btn btn-warning w-100'%>
+<div class="mb-5">
+  <div id="Edit" class="tabcontent">
+    <div class="my-5">
+      <h2 id="edit" class="text-center mb-5"><i class="far fa-user-circle mx-2 text-warning"></i> <strong>Edit Profile</strong></h2>
+      <div class="d-flex justify-content-center mb-5">
+        <% if current_user.photo.attached? %>
+          <%= cl_image_tag current_user.photo.key, width: 120, height: 120, class: 'avatar-large' %>
+        <% else %>
+         <%= image_tag "https://res.cloudinary.com/dxiatpprs/image/upload/v1622037671/Mask_Group_1_agdpry.png", width: 120, height: 120, radius: 'max' %>
         <% end %>
+      </div>
+      <div class="row justify-content-around align-items-center">
+        <div class="col-5">
+          <%= simple_form_for(current_user, method: :patch, url: "/dashboard") do |f| %>
+          <%= f.input :username %>
+          <%= f.input :first_name %>
+          <%= f.input :last_name %>
+          <%= f.input :about, as: :text %>
+          <%= f.input :address %>
+          <%= f.input :phone_number %>
+          <%= f.input :photo, as: :file, input_html: { class: 'd-none'}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo' %>
+          <%= f.submit 'Edit', class: 'btn btn-warning w-100'%>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- my reservations -->
+  <!-- my reservations -->
 
-<div id="Reservations" class="tabcontent mb-4">
-  <h2 id="reservations"class="text-center my-5"><i class="far fa-list-alt mx-2 text-warning"></i> <strong>My Reservations</strong></h2>
-<% @reservations.each do |reservation| %>
-  <div class="card-product p-3 mb-3 mx-auto" style="width: 720px">
-    <% if reservation.event.photo.attached? %>
-      <%= cl_image_tag reservation.event.photo.key, class: "cards-reservation" %>
-    <% else %>
-      <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802286/tableshare/placeholder_pykjcu.jpg', class: "cards-reservation")%>
-    <% end %>
-    <div class="card-product-infos">
-      <% if reservation.event.user.photo.attached? %>
-        <%= cl_image_tag reservation.event.user.photo.key, class: "avatar-bordered" %>
+  <div id="Reservations" class="tabcontent mb-3">
+    <h2 id="reservations"class="text-center my-5"><i class="far fa-list-alt mx-2 text-warning"></i> <strong>My Reservations</strong></h2>
+    <% @reservations.each do |reservation| %>
+      <div class="card-product p-3 mx-auto" style="width: 720px">
+      <% if reservation.event.photo.attached? %>
+        <%= cl_image_tag reservation.event.photo.key, class: "cards-reservation" %>
       <% else %>
-        <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', class: "avatar-bordered")%>
+        <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802286/tableshare/placeholder_pykjcu.jpg', class: "cards-reservation")%>
       <% end %>
-      <small class="ml-1"><%= reservation.event.user.first_name %> <%= reservation.event.user.last_name %></small>
-        <%= link_to event_path(reservation.event), {class: 'text-decoration-none'} do %>
-        <h2 class="card-product-titles mt-2"><%= reservation.event.title %></h2>
-        <p class="mt-2 position-absolute bottom-0"><em class="text-warning">Where:</em> <%= reservation.event.address.truncate(40) %>
+      <div class="card-product-infos">
+        <% if reservation.event.user.photo.attached? %>
+          <%= cl_image_tag reservation.event.user.photo.key, class: "avatar-bordered" %>
+        <% else %>
+          <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', class: "avatar-bordered")%>
+        <% end %>
+        <small class="ml-1"><%= reservation.event.user.first_name %> <%= reservation.event.user.last_name %></small>
+          <%= link_to event_path(reservation.event), {class: 'text-decoration-none'} do %>
+          <h2 class="card-product-titles mt-2"><%= reservation.event.title %></h2>
+          <p class="mt-2 position-absolute bottom-0"><em class="text-warning">Where:</em> <%= reservation.event.address.truncate(40) %>
           <br><em class="text-warning">When:</em> <%= reservation.event.start_time.strftime("%A, %e %B - %H:%M")%></p>
-      <div class="attendance-info border-attendance-info">
-        <% if reservation.event.end_time > DateTime.now %>
-          <p class="d-inline">Status: </p><br>
-          <% if reservation.status == 'accepted' %>
-            <p class="text-success"><i class="product-info-icons fas fa-check text-warning"> </i><%= reservation.status.capitalize %></p>
-          <% elsif reservation.status == 'declined' %>
-            <p class="text-danger"><i class="product-info-icons fas fa-times text-danger"> </i> <%= reservation.status.capitalize %></p>
-          <% else %>
-            <p class="text-dark"><i class="product-info-icons far fa-clock text-warning"> </i> <%= reservation.status.capitalize %></p><br>
+          <div class="attendance-info border-attendance-info">
+            <p class="d-inline">Status: </p><br>
+            <% if reservation.status == 'accepted' %>
+              <p class="text-success"><i class="product-info-icons fas fa-check text-warning"> </i><%= reservation.status.capitalize %></p>
+            <% elsif reservation.status == 'declined' %>
+              <p class="text-danger"><i class="product-info-icons fas fa-times text-danger"> </i> <%= reservation.status.capitalize %></p>
+            <% else %>
+              <p class="text-dark"><i class="product-info-icons far fa-clock text-warning"> </i> <%= reservation.status.capitalize %></p><br>
+            <% end %>
+            </div>
           <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <h2 id="reservations"class="text-center my-5"><i class="far fa-list-alt mx-2 text-warning"></i> <strong>Reservation History</strong></h2>
+  <% @pastReservations.each do |reservation| %>
+     <div class="card-product p-3 mx-auto" style="width: 720px">
+      <% if reservation.event.photo.attached? %>
+        <%= cl_image_tag reservation.event.photo.key, class: "cards-reservation" %>
+      <% else %>
+        <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802286/tableshare/placeholder_pykjcu.jpg', class: "cards-reservation")%>
+      <% end %>
+      <div class="card-product-infos">
+        <% if reservation.event.user.photo.attached? %>
+          <%= cl_image_tag reservation.event.user.photo.key, class: "avatar-bordered" %>
+        <% else %>
+          <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', class: "avatar-bordered")%>
         <% end %>
-        <% if reservation.event.end_time < DateTime.now %>
-          <% unless reservation.reviews.size.positive? %>
-          <div class="btn btn-outline-warning"><%= link_to "Leave Review", new_event_reservation_review_path(reservation.event, reservation) %>
-          <% end %>
-        <% end %>
+        <small class="ml-1"><%= reservation.event.user.first_name %> <%= reservation.event.user.last_name %></small>
+          <%= link_to event_path(reservation.event), {class: 'text-decoration-none'} do %>
+          <h2 class="card-product-titles mt-2"><%= reservation.event.title %></h2>
+          <p class="mt-2 position-absolute bottom-0"><em class="text-warning">Where:</em> <%= reservation.event.address.truncate(40) %>
+          <br><em class="text-warning">When:</em> <%= reservation.event.start_time.strftime("%A, %e %B - %H:%M")%>
+          </p>
+          <div class="attendance-info border-attendance-info">
+            <% unless reservation.reviews.size.positive? %>
+            <div class="btn btn-outline-warning"><%= link_to "Leave Review", new_event_reservation_review_path(reservation.event, reservation) %>
+            <% end %>
           </div>
         <% end %>
       </div>
     </div>
+  <% end %>
   </div>
-<% end %>
-</div>
-</div>
-</div>
 
-<!-- my tables -->
+  <!-- my tables -->
 
 <div id="Tables" class="tabcontent">
   <h2 id="tables" class="text-center my-5"><i class="fas fa-utensils mx-2 text-warning"></i> <strong>My Tables</strong></h2>
@@ -189,5 +210,3 @@
   </div>
 <% end %>
 </div>
-
-

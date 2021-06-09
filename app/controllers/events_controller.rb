@@ -9,7 +9,10 @@ class EventsController < ApplicationController
       @coordinates = @events.geocoded.map do |event|
         {
           lat: event.latitude,
-          lng: event.longitude
+          lng: event.longitude,
+          info_window: render_to_string(partial: "info_window", locals: { event: event }),
+          # image_url: helpers.asset_url('/images/map_marker_logo.png'),
+          event_id: event.id
         }
       end
     elsif search[:address].empty?
@@ -20,7 +23,10 @@ class EventsController < ApplicationController
       @coordinates = @events.geocoded.map do |event|
         {
           lat: event.latitude,
-          lng: event.longitude
+          lng: event.longitude,
+          info_window: render_to_string(partial: "info_window", locals: { event: event }),
+          # image_url: helpers.asset_url('/images/map_marker_logo.png'),
+          event_id: event.id
         }
       end
     elsif search[:date1].empty?
@@ -29,7 +35,10 @@ class EventsController < ApplicationController
       @coordinates = @events.geocoded.map do |event|
         {
           lat: event.latitude,
-          lng: event.longitude
+          lng: event.longitude,
+          info_window: render_to_string(partial: "info_window", locals: { event: event }),
+          # image_url: helpers.asset_url('/images/map_marker_logo.png'),
+          event_id: event.id
         }
       end
     else
@@ -41,7 +50,10 @@ class EventsController < ApplicationController
       @coordinates = @events.geocoded.map do |event|
         {
           lat: event.latitude,
-          lng: event.longitude
+          lng: event.longitude,
+          info_window: render_to_string(partial: "info_window", locals: { event: event }),
+          # image_url: helpers.asset_url('/images/map_marker_logo.png'),
+          event_id: event.id
         }
       end
     end
