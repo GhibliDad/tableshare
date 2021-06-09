@@ -110,7 +110,7 @@
           <% end %>
           <h3 class="text-secondary"><%= event.start_time.strftime("%A, %e %B - %H:%M")%></h3>
           <small class="text-secondary"><%= event.address.truncate(35) %></small><br>
-            <button type="button" class="btn btn-outline-warning mt-3" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" class="btn btn-outline-warning mt-3" data-toggle="modal" data-target="#exampleModal_<%= event.id %>">
             Pending Invites
             </button>
         </div>
@@ -134,7 +134,7 @@
 
 
               <!-- MODAL -->
-              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal fade" id="exampleModal_<%= event.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -145,6 +145,7 @@
                     </div>
                     <div class="modal-body">
                       <% if reservation.status == "pending" %>
+
                       <div class="text-center">
                           <div class="img avatar-bordered ml-4">
                             <% if reservation.user.photo.attached? %>
@@ -184,3 +185,4 @@
   </div>
 <% end %>
 </div>
+
