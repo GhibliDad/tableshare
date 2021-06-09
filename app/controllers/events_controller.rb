@@ -53,6 +53,7 @@ class EventsController < ApplicationController
     @messages = Message.where(chatroom_id: @chatroom)
     @message = Message.new
     @reservation = Reservation.new
+    @descriptions = @event.description.split("\r\n")
     authorize @event
     @attendees = @event.reservations.where(status: 'accepted')
     @pending = @event.reservations.where(status: 'pending')
