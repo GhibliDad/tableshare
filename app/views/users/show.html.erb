@@ -1,4 +1,4 @@
-<div class="mt-5">
+<div class="card-review p-3 my-5 mx-auto" style="width: 720px">
   <h2 id="edit" class="text-center mb-5">
     <i class="far fa-user-circle mx-2 text-warning"></i>
       <%= @user.username != "" ? @user.username : "" %>
@@ -13,10 +13,17 @@
   <div class="d-flex justify-content-center mb-0">
     <h1 id="edit" class="text-center mb-5"><strong><%= @user.first_name != "" ? @user.first_name : @user.email %> <%= @user.last_name != "" ? @user.last_name : "" %></strong></h1>
   </div>
+
+<!-- USER BIO -->
+  <div class="px-4">
+    <h4>About <%= @user.first_name != "" ?  @user.first_name : "" %></h4>
+    <p><%= @user.about %></p>
+  </div>
 </div>
 
-<p>BIO!</p>
+<% console %>
 
+<!-- USER TABLES -->
 <h2 id="tables" class="text-center my-5"><i class="fas fa-utensils mx-2 text-warning"></i> <strong><%= @user.first_name != "" ? @user.first_name : @user.email %>'s Tables</strong></h2>
 
 <% @events.each do |event| %>
@@ -29,34 +36,42 @@
       <% end %>
       <div class="card-product-infos">
         <%= link_to event_path, {class: 'text-decoration-none'} do %>
-        <h2 class="card-product-titles mt-3"><%= event.title %></h2>
-          <div class="d-flex justify-content-between align-items-center">
+        <h2 class="card-product-titles mt-0 mb-2"><%= event.title %></h2>
+          <div class="">
+            <% counter = 0 %>
             <% event.reservations.each do |reservation| %>
-            <p><strong>Guests:</strong> <%= reservation.user.first_name %>
-              <% if reservation.status == "pending" %>
-                <div>
-                  <%= link_to "Accept", "/reservations/#{reservation.id}/accept", class: 'btn btn-sm btn-warning' %>
-                  <%= link_to "Decline", "/reservations/#{reservation.id}/decline", class: 'btn btn-sm btn-danger' %>
-                </div>
-              <% else %>
-                <div class="p-1">
-                  <% if reservation.status == 'accepted' %>
-                    <p class="text-success"><%= reservation.status.capitalize %></p>
-                  <% elsif reservation.status == 'declined' %>
-                    <p class="text-danger"><%= reservation.status.capitalize %></p>
-                  <% else %>
-                    <p class="text-dark"><%= reservation.status.capitalize %></p>
-                  <% end %>
-                </div>
-              <% end %>
+              <% counter =+ 1 %>
             <% end %>
+            <p class=""><em class="text-warning">Where:</em> <%= event.address.truncate(40) %>
+            <br><em class="text-warning">When:</em> <%= event.start_time.strftime("%A, %e %B - %H:%M")%>
+            <br><em class="text-warning">Available seats:</em>
+              <span class='<% if event.available_seats == event.reservations.size %>text-warning<% else %>text-success<% end %>'>
+                <%= event.available_seats - counter %>/<%= event.available_seats %>
+              </span></p>
           </div>
         <% end %>
+      </div>
+      <div class="cards-tables-invites">
+        <p class="text-warning">Attendees:</p>
+        <div class="d-flex">
+          <% event.reservations.each do |reservation| %>
+            <% if reservation.status == "accepted" %>
+              <div class="text-center">
+                <% if reservation.user.photo.attached? %>
+                  <%= cl_image_tag reservation.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8 %>
+                <% else %>
+                  <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
   <% end %>
 <% end %>
 
+<!-- USER REVIEWS -->
 <h2 id="tables" class="text-center my-5"><i class="fas fa-utensils mx-2 text-warning"></i> <strong>Reviews for <%= @user.first_name != "" ? @user.first_name : @user.email %></strong></h2>
 
 <% @user.reservations_as_host.each do |reservation|%>
