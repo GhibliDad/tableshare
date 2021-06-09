@@ -1,6 +1,6 @@
-class DashboardsController < ApplicationController
+class DashboardController < ApplicationController
   def show
-    @user = User.find(params[:id])
+    @user = current_user
     @reservations = Reservation.where(user_id: @user)
     @events = Event.where(user_id: @user)
     authorize @user
@@ -8,15 +8,15 @@ class DashboardsController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = current_user
     authorize @user
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = current_user
     @user.update(user_params)
     authorize @user
-    redirect_to "/dashboards/#{current_user.id}"
+    redirect_to "/dashboard"
     @user.save
   end
 
