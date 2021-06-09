@@ -25,44 +25,42 @@
   <div class="row justify-content-around">
     <div class="cards">
       <% @events.each do |event| %>
-        <% unless event.start_time.past? %>
-          <%= link_to event_path(event), {class: 'text-decoration-none'} do %>
-            <div class="card-home p-3">
-              <% if event.photo.attached? %>
-                <%= cl_image_tag event.photo.key %>
-              <% else %>
-                <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802286/tableshare/placeholder_pykjcu.jpg', width:40, height:40) %>
-              <% end %>
-              <div class="card-home-infos w-100">
+        <%= link_to event_path(event), {class: 'text-decoration-none'} do %>
+          <div class="card-home p-3">
+            <% if event.photo.attached? %>
+              <%= cl_image_tag event.photo.key %>
+            <% else %>
+              <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802286/tableshare/placeholder_pykjcu.jpg', width:40, height:40) %>
+            <% end %>
+            <div class="card-home-infos w-100">
+              <div class="">
                 <div class="">
-                  <div class="">
-                    <% if event.user.photo.attached? %>
-                      <%= cl_image_tag event.user.photo.key, width:40, height:40, class: "card-home-user avatar-bordered" %>
-                    <% else %>
-                      <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
-                    <% end %>
-                  </div>
+                  <% if event.user.photo.attached? %>
+                    <%= cl_image_tag event.user.photo.key, width:40, height:40, class: "card-home-user avatar-bordered" %>
+                  <% else %>
+                    <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
+                  <% end %>
+                </div>
+                <div>
                   <div>
-                    <div>
-                      <h3 class="mt-2"><%= event.title %></h3>
-                    </div>
-                    <p><%= event.description.truncate(100) %></p>
-                    <div class="mt-3">
-                      <% if event.user.first_name %>
-                        <p><strong><%= event.user.first_name %></strong></p>
-                      <% else %>
-                        <p><strong><%= event.user.email %></strong></p>
-                      <% end %>
-                      <div class="d-flex">
-                        <p><%= event.start_time.strftime("%A, %e %B - %I:%M%p")%> </p>
-                        <p class="pl-3">€ <%= event.price %></p>
-                      </div>
+                    <h3 class="mt-2"><%= event.title %></h3>
+                  </div>
+                  <p><%= event.description.truncate(100) %></p>
+                  <div class="mt-3">
+                    <% if event.user.first_name %>
+                      <p><strong><%= event.user.first_name %></strong></p>
+                    <% else %>
+                      <p><strong><%= event.user.email %></strong></p>
+                    <% end %>
+                    <div class="d-flex">
+                      <p><%= event.start_time.strftime("%A, %e %B - %I:%M%p")%> </p>
+                      <p class="pl-3">€ <%= event.price %></p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          <% end %>
+          </div>
         <% end %>
       <% end %>
     </div>
