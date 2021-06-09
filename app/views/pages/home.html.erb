@@ -5,7 +5,7 @@
         <h1><strong>Share food.</strong></h1>
         <h1><strong>Share happiness.</strong></h1>
         <h1><strong>TableShare.</strong></h1>
-       <div class="search">
+        <div class="search">
         <%= simple_form_for :search, url: events_path, method: "GET", html: { class: 'form-inline' } do |f| %>
           <%= f.input :address, required: true, label: false, placeholder: 'Address' %>
           <%= f.input :date1, required: true, label: false, placeholder: "Start date", input_html: {id: 'range_start'} %>
