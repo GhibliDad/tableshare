@@ -1,16 +1,39 @@
-.secondary_navbar {
-  background: #FFFAF3;
-  height: 88px;
-  position: fixed;
-  width: 100%;
-  left: 0px;
-  top: 60px;
-  position: sticky;
-  top: 0;
-  box-shadow: 0 4px 2px -2px lightgray;
-  z-index: 100;
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  box-shadow: 1px 1px 10px lightgrey;
 }
 
-.secondary_navbar a {
-  color: black;
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #F5E6D3;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  border-bottom: 4px solid #fe9000;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  margin: 0;
+  animation: fadeEffect 1s;
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
