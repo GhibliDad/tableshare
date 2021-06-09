@@ -1,69 +1,131 @@
 // individual cards
-
-.card {
-  padding: 3px;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-  border-radius: 8px;
-}
-
-.card-grid {
-  display: grid;
-
-}
-
-.card-home {
+.card-trip {
   overflow: hidden;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  height: 380px;
-  width: 320px;
-  margin: 8px;
   border-radius: 8px;
+  height: 400px;
+  width: 320px;
   color: rgb(30,30,30);
     &:hover{
       color: rgb(100,100,100);
     }
 }
 
-.card-home > img {
-  height: 150px;
+.card-trip > img {
+  height: 200px;
   width: 100%;
-  border-radius: 8px;
+  padding: 20px;
+  border-radius: 32px;
   object-fit: cover;
 }
 
-.card-home h2 {
+.card-trip h2 {
   font-size: 16px;
   font-weight: bold;
   margin: 0;
 }
 
-.card-home p {
+.card-trip p {
   font-size: 12px;
   opacity: .7;
   margin: 0;
 }
 
-.card-home .card-home-infos {
-  padding: 16px;
+
+.card-trip .card-trip-infos {
+  padding: 0 20px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: flex-end;
+  // align-items: flex-end;
   position: relative;
+  height: 180px;
 }
 
-.card-home-infos .card-home-user {
+.card-trip-infos .card-trip-user {
   position: absolute;
-  left: 16px;
-  top: -20px;
-  border: 1 solid white;
+  right: 30px;
+  top: -40px;
+  width: 40px;
 }
 
-.card-home-user {
-  max-width: 100%;
-  //height: auto;
-  object-fit: cover;
-}
+
+
+
+
+
+// .card {
+//   padding: 3px;
+//   box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+//   border-radius: 8px;
+// }
+
+// .card-grid {
+//   display: grid;
+
+// }
+
+// .card-home {
+//   display: flex;
+//   flex-direction: column;
+//   //justify-content: space-between;
+//   overflow: hidden;
+//   background: white;
+//   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+//   height: 380px;
+//   width: 320px;
+//   margin: 8px;
+//   border-radius: 8px;
+//   color: rgb(30,30,30);
+//     &:hover{
+//       color: rgb(100,100,100);
+//     }
+// }
+
+// .card-home > img {
+//   height: 150px;
+//   width: 100%;
+//   border-radius: 8px;
+//   object-fit: cover;
+// }
+
+// .card-home h2 {
+//   font-size: 16px;
+//   font-weight: bold;
+//   margin: 0;
+// }
+
+// .card-home p {
+//   font-size: 12px;
+//   opacity: .7;
+//   margin: 0;
+//   position: relative;
+// }
+
+// .card-home .card-home-infos {
+//   padding: 10px;
+//   display: flex;
+//   position: relative;
+//   justify-content: space-between;
+//   align-items: flex-start;
+//   height: 187px;
+//   margin: 1rem;
+// }
+
+
+// .card-home-infos .card-home-user {
+//   position: absolute;
+//   left: 16px;
+//   top: -20px;
+//   border: 1 solid white;
+// }
+
+// .card-home-user {
+//   max-width: 100%;
+//   //height: auto;
+//   object-fit: cover;
+// }
 
 // cards grid
 
