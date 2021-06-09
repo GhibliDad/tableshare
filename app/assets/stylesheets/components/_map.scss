@@ -8,11 +8,13 @@
 }
 
 .marker {
-  background: pink;
+  background: orange;
+  border-radius: 50%;
+  // background-image: url('/images/map_marker_logo.png');
 }
 
 .card-product.selected {
   // box-shadow:         3px 3px 5px 6px #ccc;
   background-color: orange;
-  transition: all ease 0.7s;
+  transition: all ease 0.5s;
 }
