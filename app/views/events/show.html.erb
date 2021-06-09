@@ -1,6 +1,6 @@
 <% if @event.photo.attached? %>
   <div class="img-fluid show-banner" style="background-image:url('<%= cl_image_path(@event.photo.key) %>');">
-    <h2 style="padding: 250px 100px 120px; font-size: 40px; font-weight: 700; text-shadow: 1px 1px rgba(200,200,200, 0.4)"><%= @event.title %></h2>
+    <h2><%= @event.title %></h2>
   </div>
 <% else %>
   <div class="img-fluid show-banner" style="background-image:url('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802286/tableshare/placeholder_pykjcu.jpg');">
