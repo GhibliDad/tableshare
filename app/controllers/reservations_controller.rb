@@ -35,7 +35,7 @@ class ReservationsController < ApplicationController
     authorize @reservation
     @reservation.status = "accepted"
     @reservation.save
-    redirect_to user_path(current_user)
+    redirect_to dashboard_path
   end
 
   def decline
@@ -43,7 +43,7 @@ class ReservationsController < ApplicationController
     authorize @reservation
     @reservation.status = "declined"
     @reservation.save
-    redirect_to user_path(current_user)
+    redirect_to dashboard_path
   end
 
   private
