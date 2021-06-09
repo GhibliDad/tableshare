@@ -147,8 +147,8 @@
                       <% if reservation.status == "pending" %>
                       <div class="text-center">
                           <div class="img avatar-bordered ml-4">
-                            <% if reservation.event.user.photo.attached? %>
-                              <%= cl_image_tag reservation.event.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8 %>
+                            <% if reservation.user.photo.attached? %>
+                              <%= cl_image_tag reservation.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8 %>
                             <% else %>
                               <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
                             <% end %>
