@@ -50,7 +50,7 @@ var scrolled = false;
   })
   };
 
-import { navTabs };
+import { navTabs } from '../navbar/navbar_tabs' ;
 
 import { initMapbox } from '../plugins/init_mapbox';
 import { initAutocomplete } from '../plugins/init_autocomplete';
