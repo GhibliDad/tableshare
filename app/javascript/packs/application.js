@@ -63,7 +63,6 @@ document.addEventListener('turbolinks:load', () => {
   updateScroll();
   initFlatpickr();
   initAutocomplete();
-  navTabs();
 
   // setInterval(updateScroll,1000);
 });
