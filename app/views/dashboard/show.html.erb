@@ -55,12 +55,14 @@
         <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802286/tableshare/placeholder_pykjcu.jpg', class: "cards-reservation")%>
       <% end %>
       <div class="card-product-infos">
-        <% if reservation.event.user.photo.attached? %>
-          <%= cl_image_tag reservation.event.user.photo.key, class: "avatar-bordered" %>
-        <% else %>
-          <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', class: "avatar-bordered")%>
+        <%= link_to user_path(reservation.event.user.id), {class: 'text-decoration-none'} do %>
+          <% if reservation.event.user.photo.attached? %>
+            <%= cl_image_tag reservation.event.user.photo.key, class: "avatar-bordered" %>
+          <% else %>
+            <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', class: "avatar-bordered")%>
+          <% end %>
+          <small class="ml-1 text-secondary"><%= reservation.event.user.first_name %> <%= reservation.event.user.last_name %></small>
         <% end %>
-        <small class="ml-1"><%= reservation.event.user.first_name %> <%= reservation.event.user.last_name %></small>
           <%= link_to event_path(reservation.event), {class: 'text-decoration-none'} do %>
           <h2 class="card-product-titles mt-2"><%= reservation.event.title %></h2>
           <p class="mt-2 position-absolute bottom-0"><em class="text-warning">Where:</em> <%= reservation.event.address.truncate(40) %>
@@ -143,12 +145,14 @@
             <% event.reservations.each do |reservation| %>
               <% if reservation.status == "accepted" %>
                 <div class="text-center">
-                  <% if reservation.user.photo.attached? %>
-                    <%= cl_image_tag reservation.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8 %>
-                  <% else %>
-                    <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
-                  <% end %>
-                    <div class="text-secondary"><small><%= reservation.user.first_name %></small>
+                  <%= link_to user_path(reservation.user.id), {class: 'text-decoration-none'} do %>
+                    <% if reservation.user.photo.attached? %>
+                      <%= cl_image_tag reservation.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8 %>
+                    <% else %>
+                      <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
+                    <% end %>
+                      <div><small class="text-secondary"><%= reservation.user.first_name %></small>
+                    <% end %>
                   </div>
                 </div>
               <% end %>
@@ -175,16 +179,18 @@
           <div>
             <div class="notification">
               <div class="img avatar-bordered">
+                <%= link_to user_path(reservation.user.id), {class: 'text-decoration-none'} do %>
                 <% if reservation.user.photo.attached? %>
                   <%= cl_image_tag reservation.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8 %>
                 <% else %>
                   <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
                 <% end %>
               </div>
-              <div class="notification-content">
-                <p class="text-warning"><small><%= reservation.user.first_name %></p></small>
-                <p><%= reservation.message %></p>
-              </div>
+                <div class="notification-content">
+                  <p class="text-warning"><small><%= reservation.user.first_name %></p></small>
+                <% end %>
+                  <p><%= reservation.message %></p>
+                </div>
               <div class="notification-actions">
                 <%= link_to "/reservations/#{reservation.id}/accept" do %> <i class="notification-actions-icons fas fa-check text-success"></i><% end %>
                 <%= link_to "/reservations/#{reservation.id}/decline" do %> <i class="notification-actions-icons fas fa-times text-danger"></i><% end %>
