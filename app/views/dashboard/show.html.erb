@@ -22,7 +22,7 @@
   </div>
   <div class="row justify-content-around align-items-center">
     <div class="col-5">
-      <%= simple_form_for(current_user, method: :patch, url: "/dashboards/#{current_user.id}") do |f| %>
+      <%= simple_form_for(current_user, method: :patch, url: "/dashboard") do |f| %>
       <%= f.input :username %>
       <%= f.input :first_name %>
       <%= f.input :last_name %>
@@ -52,7 +52,7 @@
         <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', class: "avatar-bordered")%>
       <% end %>
       <small class="ml-1"><%= reservation.event.user.first_name %> <%= reservation.event.user.last_name %></small>
-        <%= link_to event_path(reservation), {class: 'text-decoration-none'} do %>
+        <%= link_to event_path(reservation.event), {class: 'text-decoration-none'} do %>
         <h2 class="card-product-titles mt-2"><%= reservation.event.title %></h2>
         <p class="mt-2 position-absolute bottom-0"><em class="text-warning">Where:</em> <%= reservation.event.address.truncate(40) %>
           <br><em class="text-warning">When:</em> <%= reservation.event.start_time.strftime("%A, %e %B - %H:%M")%></p>
@@ -93,7 +93,7 @@
           <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802286/tableshare/placeholder_pykjcu.jpg', class: "cards-reservation")%>
         <% end %>
         <div class="card-product-infos">
-          <%= link_to event_path, {class: 'text-decoration-none'} do %>
+          <%= link_to event_path(event), {class: 'text-decoration-none'} do %>
             <h2 class="card-product-titles mt-0 mb-2"><strong><%= event.title %></h2></strong>
           <% end %>
           <h3 class="text-secondary"><%= event.start_time.strftime("%A, %e %B - %H:%M")%></h3>
@@ -110,9 +110,12 @@
             <% event.reservations.each do |reservation| %>
               <% if reservation.status == "accepted" %>
                 <div class="text-center">
-                  <div class="img avatar-bordered ml-4"><%= cl_image_tag reservation.event.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8 %>
-                  </div>
-                  <div class="ml-2 text-secondary"><%= reservation.event.user.first_name %>
+                  <% if reservation.user.photo.attached? %>
+                    <%= cl_image_tag reservation.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8 %>
+                  <% else %>
+                    <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
+                  <% end %>
+                    <div class="ml-2 text-secondary"><%= reservation.user.first_name %>
                   </div>
                 </div>
               <% end %>
@@ -135,7 +138,7 @@
                               <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
                             <% end %>
                           </div>
-                        <div class="ml-2 text-secondary"><%= reservation.event.user.first_name %>
+                        <div class="ml-2 text-secondary"><%= reservation.user.first_name %>
                         </div>
                       </div>
                       <div>
@@ -168,7 +171,7 @@
 
 
 
-
+<% console %>
 
 
 
