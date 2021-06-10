@@ -23,7 +23,7 @@
         <% if current_user.photo.attached? %>
           <%= cl_image_tag current_user.photo.key, width: 120, height: 120, class: 'avatar-large' %>
         <% else %>
-         <%= image_tag "https://res.cloudinary.com/dxiatpprs/image/upload/v1622037671/Mask_Group_1_agdpry.png", width: 120, height: 120, radius: 'max' %>
+         <%= image_tag "https://lewagon-alumni.slack.com/files/U01TH1C68HM/F024T63NEE8/empty_avatar_wbkvsx.png", width: 120, height: 120, radius: 'max' %>
         <% end %>
       </div>
       <div class="row justify-content-around align-items-center">
@@ -46,8 +46,8 @@
 
   <!-- my reservations -->
 
-<div id="Reservations" class="tabcontent mb-3">
-  <h2 id="reservations"class="text-center my-5"><i class="far fa-list-alt mx-2 text-warning"></i> <strong>My Reservations</strong></h2>
+<div id="Reservations" class="tabcontent mb-5">
+  <h2 id="reservations"class="text-center my-3"><i class="far fa-list-alt mx-2 text-warning"></i> <strong>My Reservations</strong></h2>
   <% @reservations.each do |reservation| %>
     <div class="card-product p-3 mx-auto" style="width: 720px">
       <% if reservation.event.photo.attached? %>
@@ -65,7 +65,7 @@
           <small class="ml-1 text-secondary"><%= reservation.event.user.first_name %> <%= reservation.event.user.last_name %></small>
         <% end %>
         <%= link_to event_path(reservation.event), {class: 'text-decoration-none'} do %>
-          <h2 class="card-product-titles mt-2"><%= reservation.event.title %></h2>
+          <h2 class="card-product-titles mt-2"><%= reservation.event.title.truncate(15) %></h2>
           <p class="mt-2 position-absolute bottom-0"><em class="text-warning">Where:</em> <%= reservation.event.address.truncate(40) %>
           <br><em class="text-warning">When:</em> <%= reservation.event.start_time.strftime("%A, %e %B - %H:%M")%></p>
           <div class="attendance-info border-attendance-info">
@@ -83,7 +83,7 @@
     </div>
   <% end %>
 
-  <h2 id="reservations_history"class="text-center my-5"><i class="far fa-list-alt mx-2 text-warning"></i> <strong>Reservation History</strong></h2>
+  <h2 id="reservations_history"class="text-center mt-5 mb-3"><i class="far fa-list-alt mx-2 text-warning"></i> <strong>Reservation History</strong></h2>
   <% @pastReservations.each do |reservation| %>
      <div class="card-product p-3 mx-auto" style="width: 720px">
       <% if reservation.event.photo.attached? %>
@@ -99,7 +99,7 @@
         <% end %>
         <small class="ml-1"><%= reservation.event.user.first_name %> <%= reservation.event.user.last_name %></small>
         <%= link_to event_path(reservation.event), {class: 'text-decoration-none'} do %>
-          <h2 class="card-product-titles mt-2"><%= reservation.event.title %></h2>
+          <h2 class="card-product-titles mt-2"><%= reservation.event.title.truncate(15) %></h2>
           <p class="mt-2 position-absolute bottom-0"><em class="text-warning">Where:</em> <%= reservation.event.address.truncate(40) %>
           <br><em class="text-warning">When:</em> <%= reservation.event.start_time.strftime("%A, %e %B - %H:%M")%>
           </p>
@@ -116,6 +116,7 @@
 </div>
 
   <!-- my tables -->
+
 
 <div id="Tables" class="tabcontent">
   <h2 id="tables" class="text-center my-5"><i class="fas fa-utensils mx-2 text-warning"></i> <strong>My Tables</strong></h2>
@@ -138,15 +139,27 @@
             <% if event.reservations.where(status: "pending").count == 0 %>
               <p class="btn btn-outline-secondary p-2 mt-3">No Pending Invitations</p>
             <% else %>
-              <button type="button" class="btn btn-outline-warning mt-3" data-toggle="modal" data-target="#exampleModal_<%= event.id %>">
-                Pending Invites
-                <span class="badge"><%= event.reservations.where(status: "pending").count %></span>
-              </button>
+              <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802286/tableshare/placeholder_pykjcu.jpg', class: "cards-reservation")%>
             <% end %>
+            <div class="card-product-infos">
+              <%= link_to event_path(event), {class: 'text-decoration-none'} do %>
+                <h2 class="card-product-titles mt-0 mb-2"><strong><%= event.title %></h2></strong>
+              <% end %>
+              <h3 class="text-secondary"><%= event.start_time.strftime("%A, %e %B - %H:%M")%></h3>
+              <small class="text-secondary"><%= event.address.truncate(35) %></small><br>
+            <div class="pending-notifications">
+              <% if event.reservations.where(status: "pending").count == 0 %>
+                <p class="btn btn-warning mt-4 text-white">No Pending Invitations</p>
+              <% else %>
+                <button type="button" class="btn btn-outline-warning mt-3" data-toggle="modal" data-target="#exampleModal_<%= event.id %>">
+                  Pending Invites
+                  <span class="badge"><%= event.reservations.where(status: "pending").count %></span>
+                </button>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
-      <div>
+
         <div class="cards-tables-invites">
           <p class="text-warning">Accepted Attendees:</p>
           <div class="d-flex justify-content-between mt-2">
@@ -159,89 +172,91 @@
                     <% else %>
                       <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
                     <% end %>
-                      <div><small class="text-secondary"><%= reservation.user.first_name %></small>
-                    <% end %>
-                  </div>
+                  <% end %>
                 </div>
               <% end %>
-
-              <!-- MODAL -->
             <% end %>
           </div>
         </div>
+
       </div>
     </div>
-  </div>
-  <div class="modal fade" id="exampleModal_<%= event.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-warning" id="exampleModalLabel">Pending Invites</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <% event.reservations.each do |reservation| %>
-          <% if reservation.status == "pending" %>
-          <div>
-            <div class="notification">
-              <div class="img avatar-bordered">
-                <%= link_to user_path(reservation.user.id), {class: 'text-decoration-none'} do %>
-                <% if reservation.user.photo.attached? %>
-                  <%= cl_image_tag reservation.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8 %>
-                <% else %>
-                  <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
-                <% end %>
-              </div>
-                <div class="notification-content">
-                  <p class="text-warning"><small><%= reservation.user.first_name %></p></small>
-                <% end %>
-                  <p><%= reservation.message %></p>
+
+      <!-- MODAL -->
+    <div class="modal fade" id="exampleModal_<%= event.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-warning" id="exampleModalLabel">Pending Invites</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <% event.reservations.each do |reservation| %>
+              <% if reservation.status == "pending" %>
+                <div>
+                  <div class="notification">
+                    <div class="img avatar-bordered">
+                      <%= link_to user_path(reservation.user.id), {class: 'text-decoration-none'} do %>
+                        <% if reservation.user.photo.attached? %>
+                          <%= cl_image_tag reservation.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8 %>
+                        <% else %>
+                          <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
+                        <% end %>
+                      <% end %>
+                    </div>
+                    <div class="notification-content">
+                      <p class="text-warning"><small><%= reservation.user.first_name %></p></small>
+                      <p><%= reservation.message %></p>
+                    </div>
+                    <div class="notification-actions">
+                      <%= link_to "/reservations/#{reservation.id}/accept" do %> <i class="notification-actions-icons fas fa-check text-success"></i><% end %>
+                      <%= link_to "/reservations/#{reservation.id}/decline" do %> <i class="notification-actions-icons fas fa-times text-danger"></i><% end %>
+                    </div>
+                  </div>
                 </div>
-              <div class="notification-actions">
-                <%= link_to "/reservations/#{reservation.id}/accept" do %> <i class="notification-actions-icons fas fa-check text-success"></i><% end %>
-                <%= link_to "/reservations/#{reservation.id}/decline" do %> <i class="notification-actions-icons fas fa-times text-danger"></i><% end %>
-              </div>
+              <% elsif reservation.status == "declined" %>
+                <div class="text-center">
+                  <div class="img avatar-bordered ml-4"><%= cl_image_tag reservation.event.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8 %>
+                  </div>
+                  <div class="ml-2 text-secondary"><%= reservation.event.user.first_name %>
+                  </div>
+                </div>
+                <p class="text-danger"></p>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- TABLE HISTORY -->
+    <h2 class="text-center mt-5"><i class="fas fa-utensils mx-2 text-warning"></i> <strong>Table History</strong></h2>
+    <% @pastEvents.each do |event| %>
+      <div class="card-product p-3 my-3 mx-auto" style="width: 720px; height:100%;">
+        <div class="d-flex">
+
+          <div class="d-flex">
+            <% if event.photo.attached? %>
+              <%= cl_image_tag event.photo.key, class: "cards-reservation" %>
+            <% else %>
+              <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802286/tableshare/placeholder_pykjcu.jpg', class: "cards-reservation")%>
+            <% end %>
+            <div class="card-product-infos">
+              <%= link_to event_path(event), {class: 'text-decoration-none'} do %>
+                <h2 class="card-product-titles mt-0 mb-2"><strong><%= event.title %></h2></strong>
+              <% end %>
+              <h3 class="text-secondary"><%= event.start_time.strftime("%A, %e %B - %H:%M")%></h3>
+              <small class="text-secondary"><%= event.address.truncate(50) %></small><br>
+              <p class="text-secondary"><em><%= event.description.truncate(100) %></em></p>
             </div>
           </div>
-          <% elsif reservation.status == "declined" %>
-            <div class="text-center">
-              <div class="img avatar-bordered ml-4"><%= cl_image_tag reservation.event.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8 %>
-              </div>
-              <div class="ml-2 text-secondary"><%= reservation.event.user.first_name %>
-              </div>
-            </div>
-            <p class="text-danger"></p>
-          <% end %>
-          <% end %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-warning" data-dismiss="modal">Close</button>
         </div>
       </div>
-    </div>
-  </div>
-<% end %>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
+    <% end %>
 </div>
