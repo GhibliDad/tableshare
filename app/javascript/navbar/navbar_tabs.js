@@ -1,29 +1,39 @@
   // Declare all variables
-  function navTabs(evt, tabTitle) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  var tabTitle = document.getElementById(tabTitle)
-  if (tabTitle) {
-    tabTitle.style.display = "block";
-  }
-  if (evt) {
-    evt.currentTarget.className += " active";
+  function navTabs() {
+    var navbar = document.getElementById("navTabs");
+    if (navbar) {
+      var profileBtn = document.getElementById("myProfile")
+      var reservationBtn = document.getElementById("myReservations")
+      var tablesBtn = document.getElementById("myTables")
+      var reservations = document.getElementById("reservationsContent")
+      var profile = document.getElementById("profileContent")
+      var tables = document.getElementById("tablesContent")
+
+      profileBtn.addEventListener("click", function(){
+        this.classList.add('active')
+        reservationBtn.classList.remove('active')
+        tablesBtn.classList.remove('active')
+        profile.classList.remove("no_show")
+        tables.classList.add("no_show")
+        reservations.classList.add("no_show")
+      })
+      reservationBtn.addEventListener("click", function(){
+        this.classList.add('active')
+        tablesBtn.classList.remove('active')
+        profileBtn.classList.remove('active')
+        reservations.classList.remove("no_show")
+        tables.classList.add("no_show")
+        profile.classList.add("no_show")
+      })
+      tablesBtn.addEventListener("click", function(){
+        this.classList.add('active')
+        profileBtn.classList.remove('active')
+        reservationBtn.classList.remove('active')
+        tables.classList.remove("no_show")
+        profile.classList.add("no_show")
+        reservations.classList.add("no_show")
+      })
+
     }
   }
-
-
-
-  var defaultOpen =  document.getElementById("defaultOpen")
-  if(defaultOpen) {
-    defaultOpen.click();
-  }
-
-
 export { navTabs };

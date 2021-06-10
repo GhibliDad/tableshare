@@ -1,4 +1,4 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Tableshare</title>
@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application' %>
+      <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
 
   </head>
 
@@ -23,33 +24,7 @@
     <%= yield %>
     <%= render 'shared/footer' %>
 
-  <script>
-    function navTabs(evt, tabTitle) {
-      var i, tabcontent, tablinks;
-      tabcontent = document.getElementsByClassName("tabcontent");
-      if (tabcontent) {
-        for (i = 0; i < tabcontent.length; i++) {
-          tabcontent[i].style.display = "none";
-        }
-      }
 
-      tablinks = document.getElementsByClassName("tablinks");
-      for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-      }
-      var tabTitle = document.getElementById(tabTitle)
-      tabTitle.style.display = "block";
-      evt.currentTarget.className += " active";
-    }
-
-
-    var defaultOpen =  document.getElementById("defaultOpen")
-    if(defaultOpen) {
-      defaultOpen.click();
-    }
-
-  </script>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
   <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 
   </body>

@@ -11,7 +11,6 @@ class EventsController < ApplicationController
         {
           lat: event.latitude,
           lng: event.longitude,
-          image_url: helpers.asset_url('/images/map_marker_logo.png'),
           event_id: event.id
         }
       end
@@ -24,7 +23,6 @@ class EventsController < ApplicationController
         {
           lat: event.latitude,
           lng: event.longitude,
-          image_url: helpers.asset_url('/images/map_marker_logo.png'),
           event_id: event.id
         }
       end
@@ -35,7 +33,6 @@ class EventsController < ApplicationController
         {
           lat: event.latitude,
           lng: event.longitude,
-          image_url: helpers.asset_url('/images/map_marker_logo.png'),
           event_id: event.id
         }
       end
@@ -49,7 +46,6 @@ class EventsController < ApplicationController
         {
           lat: event.latitude,
           lng: event.longitude,
-          image_url: helpers.asset_url('/images/map_marker_logo.png'),
           event_id: event.id
         }
       end
