@@ -120,7 +120,7 @@
   <h2 id="tables" class="text-center my-3"><i class="fas fa-utensils mx-2 text-warning"></i> <strong>My Tables</strong></h2>
 <% @events.each do |event| %>
   <div class="card-product card-dashboard p-3 mb-3 mx-auto" style="width: 720px; height:100%;">
-    <div class="d-flex">
+    <div class="d-flex justify-content-between">
       <div class="d-flex">
         <% if event.photo.attached? %>
           <%= cl_image_tag event.photo.key, class: "cards-reservation" %>
@@ -129,7 +129,7 @@
         <% end %>
         <div class="card-product-infos">
               <%= link_to event_path(event), {class: 'text-decoration-none'} do %>
-                <h2 class="card-product-titles mt-0 mb-2"><strong><%= event.title %></h2></strong>
+                <h2 class="card-product-titles mt-0 mb-2"><%= event.title.truncate(17) %></h2>
               <% end %>
               <h3 class="text-secondary"><%= event.start_time.strftime("%A, %e %B - %H:%M")%></h3>
               <small class="text-secondary"><%= event.address.truncate(35) %></small><br>
@@ -144,24 +144,24 @@
               <% end %>
             </div>
         </div>
-      </div>
-    </div>
-    <div class="cards-tables-invites">
-      <p class="text-warning">Accepted Attendees:</p>
-      <div class="d-flex justify-content-between mt-2">
-        <% event.reservations.each do |reservation| %>
-          <% if reservation.status == "accepted" %>
-            <div class="text-center">
-              <%= link_to user_path(reservation.user.id), {class: 'text-decoration-none'} do %>
-                <% if reservation.user.photo.attached? %>
-                  <%= cl_image_tag reservation.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8 %>
-                <% else %>
-                  <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
-                <% end %>
+        <div class="cards-tables-invites pl-5">
+          <p class="text-warning">Accepted Attendees:</p>
+          <div class="d-flex mt-2">
+            <% event.reservations.each do |reservation| %>
+              <% if reservation.status == "accepted" %>
+                <div class="text-center">
+                  <%= link_to user_path(reservation.user.id), {class: 'text-decoration-none'} do %>
+                    <% if reservation.user.photo.attached? %>
+                      <%= cl_image_tag reservation.user.photo.key, width:40, height:40, class: "avatar-bordered" %>
+                    <% else %>
+                      <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', width:40, height:40, class: "avatar-bordered") %>
+                    <% end %>
+                  <% end %>
+                </div>
               <% end %>
-            </div>
-          <% end %>
-        <% end %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -230,7 +230,7 @@
             <% end %>
             <div class="card-product-infos">
               <%= link_to event_path(event), {class: 'text-decoration-none'} do %>
-                <h2 class="card-product-titles mt-0 mb-2"><strong><%= event.title %></h2></strong>
+                <h2 class="card-product-titles mt-0 mb-2"><%= event.title %></h2>
               <% end %>
               <h3 class="text-secondary"><%= event.start_time.strftime("%A, %e %B - %H:%M")%></h3>
               <small class="text-secondary"><%= event.address.truncate(50) %></small><br>
