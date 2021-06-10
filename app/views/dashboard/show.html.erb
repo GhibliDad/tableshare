@@ -136,7 +136,7 @@
             <small class="text-secondary"><%= event.address.truncate(35) %></small><br>
           <div class="pending-notifications">
             <% if event.reservations.where(status: "pending").count == 0 %>
-              <p class="btn btn-warning mt-4 text-white">No Pending Invitations</p>
+              <p class="btn btn-outline-secondary p-2 mt-3">No Pending Invitations</p>
             <% else %>
               <button type="button" class="btn btn-outline-warning mt-3" data-toggle="modal" data-target="#exampleModal_<%= event.id %>">
                 Pending Invites
