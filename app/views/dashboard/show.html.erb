@@ -53,14 +53,14 @@
       <% if reservation.event.photo.attached? %>
         <%= cl_image_tag reservation.event.photo.key, class: "cards-reservation" %>
       <% else %>
-        <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802286/tableshare/placeholder_pykjcu.jpg', class: "cards-reservation")%>
+        <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', class: "cards-reservation")%>
       <% end %>
       <div class="card-product-infos">
         <%= link_to user_path(reservation.event.user.id), {class: 'text-decoration-none'} do %>
           <% if reservation.event.user.photo.attached? %>
             <%= cl_image_tag reservation.event.user.photo.key, class: "avatar-bordered" %>
           <% else %>
-            <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', class: "avatar-bordered")%>
+            <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', class: "avatar-bordered")%>
           <% end %>
           <small class="ml-1 text-secondary"><%= reservation.event.user.first_name %> <%= reservation.event.user.last_name %></small>
         <% end %>
@@ -95,7 +95,7 @@
         <% if reservation.event.user.photo.attached? %>
           <%= cl_image_tag reservation.event.user.photo.key, class: "avatar-bordered" %>
         <% else %>
-          <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', class: "avatar-bordered")%>
+          <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', class: "avatar-bordered")%>
         <% end %>
         <small class="ml-1"><%= reservation.event.user.first_name %> <%= reservation.event.user.last_name %></small>
         <%= link_to event_path(reservation.event), {class: 'text-decoration-none'} do %>
@@ -157,7 +157,7 @@
                     <% if reservation.user.photo.attached? %>
                       <%= cl_image_tag reservation.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8 %>
                     <% else %>
-                      <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
+                      <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
                     <% end %>
                       <div><small class="text-secondary"><%= reservation.user.first_name %></small>
                     <% end %>
@@ -191,7 +191,7 @@
                 <% if reservation.user.photo.attached? %>
                   <%= cl_image_tag reservation.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8 %>
                 <% else %>
-                  <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
+                  <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
                 <% end %>
               </div>
                 <div class="notification-content">
@@ -223,27 +223,4 @@
     </div>
   </div>
 <% end %>
-</div>
-
-data-toggle="modal" data-target="#exampleModal"
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
 </div>

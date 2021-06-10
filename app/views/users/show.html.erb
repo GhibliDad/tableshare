@@ -7,7 +7,7 @@
     <% if @user.photo.attached? %>
       <%= cl_image_tag @user.photo.key, width: 120, height: 120, class: 'avatar-large' %>
     <% else %>
-     <%= image_tag "https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png", width: 160, height: 160, radius: 'max' %>
+     <%= image_tag "https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png", width: 160, height: 160, radius: 'max' %>
     <% end %>
   </div>
   <div class="d-flex justify-content-center mb-0">
@@ -58,7 +58,7 @@
                 <% if reservation.user.photo.attached? %>
                   <%= cl_image_tag reservation.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8 %>
                 <% else %>
-                  <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
+                  <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
                 <% end %>
               </div>
             <% end %>
