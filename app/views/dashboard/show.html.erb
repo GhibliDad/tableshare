@@ -83,7 +83,7 @@
     </div>
   <% end %>
 
-  <h2 id="reservations_history"class="text-center mt-5"><i class="far fa-list-alt mx-2 text-warning"></i> <strong>Reservation History</strong></h2>
+  <h2 id="reservations_history"class="text-center mt-5 mb-3"><i class="far fa-list-alt mx-2 text-warning"></i> <strong>Reservation History</strong></h2>
   <% @pastReservations.each do |reservation| %>
      <div class="card-product p-3 mx-auto" style="width: 720px">
       <% if reservation.event.photo.attached? %>
