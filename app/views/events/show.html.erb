@@ -69,6 +69,7 @@
             <% @attendees.each do |attendee| %>
               <li class="list-inline-item">
                 <% guest = attendee.user %>
+
                 <% if guest.photo.attached? %>
                   <p data-toggle="modal" data-target="#userModal_<%= guest.id %>"><%= cl_image_tag guest.photo.key, width:40, height:40, class: "card-home-user avatar-bordered" %></p>
                 <% else %>

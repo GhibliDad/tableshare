@@ -1,14 +1,3 @@
-.mapboxgl-popup {
-  max-width: 200px;
-  // box-shadow: 3px 3px 5px 6px #ccc;
-}
-
-.mapboxgl-popup-content {
-  text-align: center;
-  color: #FF9000;
-  font-family: 'Open Sans', sans-serif;
-}
-
 .marker {
   background: orange;
   border-radius: 50%;
@@ -17,6 +6,12 @@
 
 .card-product.selected {
   // box-shadow:         3px 3px 5px 6px #ccc;
-  background-color: orange;
+  background-color: #fff0e2;
   transition: all ease 0.5s;
+}
+
+.marker.selected {
+  height: 50px !important;
+  width: 50px !important;
+  transition: all 400ms cubic-bezier(.47,1.64,.41,.8);
 }
