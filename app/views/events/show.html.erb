@@ -14,7 +14,13 @@
         <% if @host == current_user %>
           <p><strong>Host:</strong> You 😊</p>
         <% else %>
-          <p><strong>Host:</strong> <%= @host.first_name %> (<%= @host.username %>) </p>
+          <p><strong>Host:</strong> <%= @host.first_name != "" ? @host.first_name : @host.email %></p>
+        <% end %>
+        <% if @host.photo.attached? %>
+          <p data-toggle="modal" data-target="#hostModal"><%= cl_image_tag @host.photo.key, width:40, height:40, class: "card-home-user avatar-bordered" %></p>
+        <% else %>
+          <p data-toggle="modal" data-target="#hostModal"><%= cl_image_tag 'https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', width: 40, height: 40, class: "card-home-user avatar-bordered" %></p>
+
         <% end %>
         <p><strong>Price:</strong> <%= @event.price %> €</p>
         <p><strong>Available seats: </strong> <%= @event.available_seats %></p>
@@ -63,14 +69,40 @@
             <% @attendees.each do |attendee| %>
               <li class="list-inline-item">
                 <% guest = attendee.user %>
-                  <%= link_to user_path(guest), {class: 'text-decoration-none'} do %>
-                  <% if guest.photo.attached? %>
-                    <p><%= cl_image_tag guest.photo.key, width:40, height:40, class: "card-home-user avatar-bordered" %></p>
-                  <% else %>
-                    <p><%= cl_image_tag 'https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', width: 40, height: 40, class: "card-home-user avatar-bordered" %></p>
-                  <% end %>
+
+                <% if guest.photo.attached? %>
+                  <p data-toggle="modal" data-target="#userModal_<%= guest.id %>"><%= cl_image_tag guest.photo.key, width:40, height:40, class: "card-home-user avatar-bordered" %></p>
+                <% else %>
+                  <p data-toggle="modal" data-target="#userModal_<%= guest.id %>"><%= cl_image_tag 'https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', width: 40, height: 40, class: "card-home-user avatar-bordered" %></p>
                 <% end %>
               </li>
+              <!-- userMODAL BEGIN -->
+              <div class="modal fade" id="userModal_<%= guest.id %>" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="userModalLabel">
+                        <% if guest.photo.attached? %>
+                          <p><%= cl_image_tag guest.photo.key, width:40, height:40, class: "card-home-user avatar-bordered" %></p>
+                        <% else %>
+                          <p><%= cl_image_tag 'https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', width: 40, height: 40, class: "card-home-user avatar-bordered" %></p>
+                        <% end %>
+                        <%= guest.first_name != "" ? guest.first_name : guest.email %></h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+
+                      <%= guest.about %>
+                    </div>
+                    <div class="modal-footer">
+                      <%= link_to "Go to profile", user_path(guest), :id=>"", :class=>"btn btn-outline-warning" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- userMODAL END -->
             <% end %>
           </ul>
         </div>
@@ -117,6 +149,35 @@
     </div>
   </div>
 </div>
+
+<!-- data-toggle="modal" data-target="#hostModal" -->
+
+<!-- hostModal -->
+<div class="modal fade" id="hostModal" tabindex="-1" role="dialog" aria-labelledby="hostModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="hostModalLabel">
+          <% if @host.photo.attached? %>
+            <p><%= cl_image_tag @host.photo.key, width:40, height:40, class: "card-home-user avatar-bordered" %></p>
+          <% else %>
+            <p><%= cl_image_tag 'https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', width: 40, height: 40, class: "card-home-user avatar-bordered" %></p>
+          <% end %>
+          <%= @host.first_name != "" ? @host.first_name : @host.email %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= @host.about %>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Go to profile", user_path(@event), :id=>"", :class=>"btn btn-outline-warning" %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- hostMODAL END -->
 
 <!-- Event Reviews -->
 <% if @event.end_time < DateTime.now %>
