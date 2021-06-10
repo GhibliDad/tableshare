@@ -1,5 +1,5 @@
 <!-- navbar -->
-  <!-- navlinks -->
+<!-- navlinks -->
 
 <div class="tab row d-flex justify-content-around align-items-center text-center">
   <div class="col-2 m-auto">
@@ -9,9 +9,9 @@
       <p class="my-0"><strong><%= current_user.email %></strong></p>
     <% end %>
   </div>
-    <button class="tablinks col-2 m-auto" onclick="navTabs(event, 'Reservations')" id="defaultOpen"><i class="far fa-list-alt mx-2 text-warning"></i>My Reservations</button>
-    <button class="tablinks col-2 m-auto" onclick="navTabs(event, 'Tables')"><i class="fas fa-utensils mx-2 text-warning"></i>My Tables</button>
-    <button class="tablinks col-2 m-auto" onclick="navTabs(event, 'Edit')"><i class="far fa-user-circle mx-2 text-warning"></i>Edit profile</button>
+  <button class="tablinks col-2 m-auto" onclick="navTabs(event, 'Reservations')" id="defaultOpen"><i class="far fa-list-alt mx-2 text-warning"></i>My Reservations</button>
+  <button class="tablinks col-2 m-auto" onclick="navTabs(event, 'Tables')"><i class="fas fa-utensils mx-2 text-warning"></i>My Tables</button>
+  <button class="tablinks col-2 m-auto" onclick="navTabs(event, 'Edit')"><i class="far fa-user-circle mx-2 text-warning"></i>Edit profile</button>
 </div>
 
 <!-- edit profile form -->
@@ -42,13 +42,14 @@
       </div>
     </div>
   </div>
+</div>
 
   <!-- my reservations -->
 
-  <div id="Reservations" class="tabcontent mb-3">
-    <h2 id="reservations"class="text-center my-5"><i class="far fa-list-alt mx-2 text-warning"></i> <strong>My Reservations</strong></h2>
-    <% @reservations.each do |reservation| %>
-      <div class="card-product p-3 mx-auto" style="width: 720px">
+<div id="Reservations" class="tabcontent mb-3">
+  <h2 id="reservations"class="text-center my-5"><i class="far fa-list-alt mx-2 text-warning"></i> <strong>My Reservations</strong></h2>
+  <% @reservations.each do |reservation| %>
+    <div class="card-product p-3 mx-auto" style="width: 720px">
       <% if reservation.event.photo.attached? %>
         <%= cl_image_tag reservation.event.photo.key, class: "cards-reservation" %>
       <% else %>
@@ -63,7 +64,7 @@
           <% end %>
           <small class="ml-1 text-secondary"><%= reservation.event.user.first_name %> <%= reservation.event.user.last_name %></small>
         <% end %>
-          <%= link_to event_path(reservation.event), {class: 'text-decoration-none'} do %>
+        <%= link_to event_path(reservation.event), {class: 'text-decoration-none'} do %>
           <h2 class="card-product-titles mt-2"><%= reservation.event.title %></h2>
           <p class="mt-2 position-absolute bottom-0"><em class="text-warning">Where:</em> <%= reservation.event.address.truncate(40) %>
           <br><em class="text-warning">When:</em> <%= reservation.event.start_time.strftime("%A, %e %B - %H:%M")%></p>
@@ -76,14 +77,13 @@
             <% else %>
               <p class="text-dark"><i class="product-info-icons far fa-clock text-warning"> </i> <%= reservation.status.capitalize %></p><br>
             <% end %>
-            </div>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 
-  <h2 id="reservations"class="text-center my-5"><i class="far fa-list-alt mx-2 text-warning"></i> <strong>Reservation History</strong></h2>
+  <h2 id="reservations_history"class="text-center my-5"><i class="far fa-list-alt mx-2 text-warning"></i> <strong>Reservation History</strong></h2>
   <% @pastReservations.each do |reservation| %>
      <div class="card-product p-3 mx-auto" style="width: 720px">
       <% if reservation.event.photo.attached? %>
@@ -98,21 +98,22 @@
           <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', class: "avatar-bordered")%>
         <% end %>
         <small class="ml-1"><%= reservation.event.user.first_name %> <%= reservation.event.user.last_name %></small>
-          <%= link_to event_path(reservation.event), {class: 'text-decoration-none'} do %>
+        <%= link_to event_path(reservation.event), {class: 'text-decoration-none'} do %>
           <h2 class="card-product-titles mt-2"><%= reservation.event.title %></h2>
           <p class="mt-2 position-absolute bottom-0"><em class="text-warning">Where:</em> <%= reservation.event.address.truncate(40) %>
           <br><em class="text-warning">When:</em> <%= reservation.event.start_time.strftime("%A, %e %B - %H:%M")%>
           </p>
           <div class="attendance-info border-attendance-info">
             <% unless reservation.reviews.size.positive? %>
-            <div class="btn btn-outline-warning"><%= link_to "Leave Review", new_event_reservation_review_path(reservation.event, reservation) %>
+              <div class="btn btn-outline-warning"><%= link_to "Leave Review", new_event_reservation_review_path(reservation.event, reservation) %>
+              </div>
             <% end %>
           </div>
         <% end %>
       </div>
     </div>
   <% end %>
-  </div>
+</div>
 
   <!-- my tables -->
 
