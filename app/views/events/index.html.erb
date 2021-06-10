@@ -25,16 +25,16 @@
                             <%= cl_image_tag 'https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', width: 40, height: 40, class: "card-home-user avatar-bordered" %>
                           <% end %>
                           <% if event.user.first_name %>
-                            <p class="ml-2 mt-2"><strong><%= event.user.first_name %></strong></p>
+                            <small class="ml-2 mt-2"><%= event.user.first_name %></small>
                           <% else %>
                             <p class="ml-2"><strong><%= event.user.email %></strong></p>
                           <% end %>
                         </div>
-                        <h3 class="text-warning event-price"><strong>€ <%= event.price %></strong></h3>
+                        <h3 class="event-price text-warning"><strong>€ <%= event.price %></strong></h3>
                       </div>
                       <div>
                         <h2 class="mt-2 text-warning"><strong><%= event.title %></h2></strong>
-                        <p><%= event.description.truncate(150) %></p>
+                        <h3><%= event.description.truncate(150) %></h3>
                         <p class="mt-3"><%= event.start_time.strftime("%A, %e %B - %H:%M")%> </p>
                       </div>
                     </div>
