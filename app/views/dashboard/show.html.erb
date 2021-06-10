@@ -23,7 +23,7 @@
         <% if current_user.photo.attached? %>
           <%= cl_image_tag current_user.photo.key, width: 120, height: 120, class: 'avatar-large' %>
         <% else %>
-         <%= image_tag "https://lewagon-alumni.slack.com/files/U01TH1C68HM/F024T63NEE8/empty_avatar_wbkvsx.png", width: 120, height: 120, radius: 'max' %>
+         <%= image_tag "https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png", width: 120, height: 120, radius: 'max' %>
         <% end %>
       </div>
       <div class="row justify-content-around align-items-center">
@@ -60,7 +60,7 @@
           <% if reservation.event.user.photo.attached? %>
             <%= cl_image_tag reservation.event.user.photo.key, class: "avatar-bordered" %>
           <% else %>
-            <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', class: "avatar-bordered")%>
+            <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', class: "avatar-bordered")%>
           <% end %>
           <small class="ml-1 text-secondary"><%= reservation.event.user.first_name %> <%= reservation.event.user.last_name %></small>
         <% end %>
@@ -95,7 +95,7 @@
         <% if reservation.event.user.photo.attached? %>
           <%= cl_image_tag reservation.event.user.photo.key, class: "avatar-bordered" %>
         <% else %>
-          <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', class: "avatar-bordered")%>
+          <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', class: "avatar-bordered")%>
         <% end %>
         <small class="ml-1"><%= reservation.event.user.first_name %> <%= reservation.event.user.last_name %></small>
         <%= link_to event_path(reservation.event), {class: 'text-decoration-none'} do %>
@@ -170,7 +170,7 @@
                     <% if reservation.user.photo.attached? %>
                       <%= cl_image_tag reservation.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8 %>
                     <% else %>
-                      <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
+                      <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
                     <% end %>
                   <% end %>
                 </div>
@@ -202,7 +202,7 @@
                         <% if reservation.user.photo.attached? %>
                           <%= cl_image_tag reservation.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8 %>
                         <% else %>
-                          <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622802280/tableshare/empty_avatar_wbkvsx.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
+                          <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', width:40, height:40, class: "card-home-user avatar-bordered") %>
                         <% end %>
                       <% end %>
                     </div>
