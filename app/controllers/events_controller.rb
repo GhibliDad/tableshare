@@ -94,6 +94,21 @@ class EventsController < ApplicationController
     end
   end
 
+  def edit
+    @user = current_user
+    @event = Event.find(params[:id])
+    authorize @event
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    @user = current_user
+    @event.update(event_params)
+    authorize @event
+    @event.save
+    redirect_to event_path(@event)
+  end
+
   private
 
   def event_params

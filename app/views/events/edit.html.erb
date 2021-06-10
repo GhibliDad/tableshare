@@ -1,0 +1,22 @@
+<div class="form-container mb-5">
+  <div class="row justify-content-center mt-5">
+    <div class="col-5">
+      <h2 class="mb-5 text-center text-warning"><strong>Update table</strong></h2>
+        <%= simple_form_for @event do |f| %>
+        <%= f.input :title %>
+        <%= f.input :address, input_html: { id: 'search_address'} %>
+        <% f.input :date %>
+        <%= f.input :start_time, minute_step: 15 %>
+        <%= f.input :end_time, minute_step: 15 %>
+        <%= f.input :description %>
+        <%= f.input :ingredients %>
+        <%= f.input :available_seats %>
+        <%= f.input :price %>
+        <%= f.input :photo, as: :file, input_html: { class: 'd-none'}, label_html: { class: 'upload-photo'}, label: '📷 Upload a photo' %>
+        <%= f.submit 'Create Table', class: 'btn btn-warning' %>
+        <%= link_to 'Cancel', root_path, class: 'btn btn-outline-warning' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
