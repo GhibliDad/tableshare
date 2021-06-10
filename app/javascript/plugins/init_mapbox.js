@@ -23,6 +23,7 @@ const initMapbox = () => {
       const element = document.createElement('div');
       element.className = 'marker';
       element.id = 'event_' + marker.event_id;
+      element.style.backgroundImage = "url('https://res.cloudinary.com/dkdk2tuol/image/upload/v1622726888/tableshare/logo_01_kd5ctr.png')";
       element.style.backgroundSize = 'contain';
       element.style.width = '25px';
       element.style.height = '25px';
