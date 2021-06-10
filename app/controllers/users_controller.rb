@@ -5,15 +5,6 @@ class UsersController < ApplicationController
     @events = Event.where(user_id: @user)
     authorize @user
     @reservations = @user.reservations
-    counter = 0
-    total = 0
-    @user.reservations_as_host.each do |reservation|
-      reservation.reviews.each do |review|
-        counter += review.total_rating
-        total += 1
-      end
-    end
-    @rating = counter / total
   end
 
   def edit
