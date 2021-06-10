@@ -117,3 +117,23 @@
 
 .full-event {
 }
+
+.pending-notifications {
+  position: relative;
+  display: inline-block;
+}
+
+.pending-notifications .badge {
+  position: absolute;
+  top: 5px;
+  right: -12px;
+  padding: 5px 10px;
+  border-radius: 24%;
+  background-color: #FF9000;
+  color: white;
+  border: 1px solid white;
+}
+
+
+
+
