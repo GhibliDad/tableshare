@@ -13,7 +13,11 @@ class UsersController < ApplicationController
         total += 1
       end
     end
-    @rating = counter / total
+    if total == 0
+      @rating = nil
+    else
+      @rating = counter / total
+    end
   end
 
   def edit
