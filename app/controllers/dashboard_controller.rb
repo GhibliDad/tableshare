@@ -8,7 +8,13 @@ class DashboardController < ApplicationController
     @reservations = @reservations.select do |reservation|
       reservation.event.end_time.future?
     end
-    @events = Event.where(user_id: @user)
+    @events = @user.events
+    @pastEvents = @events.select do |event|
+      event.end_time.past?
+    end
+    @events = @events.select do |event|
+      event.end_time.future?
+    end
     authorize @user
   end
 
