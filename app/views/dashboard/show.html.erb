@@ -151,7 +151,7 @@
       <div class="d-flex justify-content-between mt-2">
         <% event.reservations.each do |reservation| %>
           <% if reservation.status == "accepted" %>
-            <div class="text-center">
+            <div class="text-center pr-1">
               <%= link_to user_path(reservation.user.id), {class: 'text-decoration-none'} do %>
                 <% if reservation.user.photo.attached? %>
                   <%= cl_image_tag reservation.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8 %>
