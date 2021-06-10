@@ -1,9 +1,9 @@
 <div class="card-review p-3 my-5 mx-auto" style="width: 720px">
-  <h2 id="edit" class="text-center my-3">
+  <h2 id="edit" class="text-center mb-5">
     <i class="far fa-user-circle mx-2 text-warning"></i>
       <%= @user.username != "" ? @user.username : "" %>
   </h2>
-  <div class="d-flex justify-content-center m-5">
+  <div class="d-flex justify-content-center mb-5">
     <% if @user.photo.attached? %>
       <%= cl_image_tag @user.photo.key, width: 120, height: 120, class: 'avatar-large' %>
     <% else %>
@@ -18,18 +18,18 @@
   </div>
 
 <!-- USER BIO -->
-  <div class="px-5">
+  <div class="px-4">
     <h4>About <%= @user.first_name != "" ?  @user.first_name : "" %></h4>
     <p><%= @user.about %></p>
   </div>
 </div>
 
 <!-- USER TABLES -->
-<h2 id="tables" class="text-center my-5"><i class="fas fa-utensils mx-2 text-warning"></i> <strong><%= @user.first_name == "" ? @user.first_name : @user.email %>'s Tables</strong></h2>
+<h2 id="tables" class="text-center my-5"><i class="fas fa-utensils mx-2 text-warning"></i> <strong><%= @user.first_name != "" ? @user.first_name : @user.email %>'s Tables</strong></h2>
 
 <% @events.each do |event| %>
   <% if event.end_time > DateTime.now %>
-    <div class="card-product p-3 mb-5 mx-auto" style="width: 720px">
+    <div class="card-product p-3 mb-3 mx-auto" style="width: 720px">
       <% if event.photo.attached? %>
         <%= cl_image_tag event.photo.key, class: "cards-reservation" %>
       <% else %>
@@ -37,7 +37,7 @@
       <% end %>
       <div class="card-product-infos">
         <%= link_to event_path, {class: 'text-decoration-none'} do %>
-        <h2 class="card-product-titles mt-0 mb-2"><%= event.title.truncate(17) %></h2>
+        <h2 class="card-product-titles mt-0 mb-2"><%= event.title %></h2>
           <div class="">
             <% counter = 0 %>
             <% event.reservations.each do |reservation| %>
@@ -52,16 +52,16 @@
           </div>
         <% end %>
       </div>
-      <div class="cards-tables-invites pl-3">
-        <p class="text-warning">Attendees:</p>
+      <div class="cards-tables-invites pl-5">
+        <p class="text-warning mb-2">Attendees:</p>
         <div class="d-flex">
           <% event.reservations.each do |reservation| %>
             <% if reservation.status == "accepted" %>
               <div class="text-center">
                 <% if reservation.user.photo.attached? %>
-                  <%= cl_image_tag reservation.user.photo.key, width: 40, height: 40, crop: :thumb, :radius => 8, class: "card-home-user avatar-bordered m-1" %>
+                  <%= cl_image_tag reservation.user.photo.key, width: 40, height: 40, class: "avatar-bordered mr-1" %>
                 <% else %>
-                  <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', width:40, height:40, class: "card-home-user avatar-bordered m-1") %>
+                  <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', width:40, height:40, class: "avatar-bordered mr-1") %>
                 <% end %>
               </div>
             <% end %>
@@ -73,7 +73,7 @@
 <% end %>
 
 <!-- USER REVIEWS -->
-<h2 id="tables" class="text-center my-5"><i class="fas fa-utensils mx-2 text-warning"></i> <strong>Reviews for <%= @user.first_name == "" ? @user.first_name : @user.email %></strong></h2>
+<h2 id="tables" class="text-center my-5"><i class="fas fa-utensils mx-2 text-warning"></i> <strong>Reviews for <%= @user.first_name != "" ? @user.first_name : @user.email %></strong></h2>
 
 <% @user.reservations_as_host.each do |reservation|%>
   <% if reservation.reviews %>

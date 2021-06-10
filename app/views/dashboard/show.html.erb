@@ -144,20 +144,18 @@
               <% end %>
             </div>
         </div>
-      </div>
-    </div>
-    <div class="cards-tables-invites pl-5">
-      <p class="text-warning">Accepted Attendees:</p>
-      <div class="d-flex justify-content-between mt-2">
-        <% event.reservations.each do |reservation| %>
-          <% if reservation.status == "accepted" %>
-            <div class="text-center pr-1">
-              <%= link_to user_path(reservation.user.id), {class: 'text-decoration-none'} do %>
-                <% if reservation.user.photo.attached? %>
-                  <%= cl_image_tag reservation.user.photo.key, width:40, height:40, class: "avatar-bordered" %>
-                <% else %>
-                  <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', width:40, height:40, class: "avatar-bordered") %>
-                <% end %>
+        <div class="cards-tables-invites pl-5">
+          <p class="text-warning">Accepted Attendees:</p>
+          <div class="d-flex mt-2">
+            <% event.reservations.each do |reservation| %>
+              <% if reservation.status == "accepted" %>
+                <div class="text-center">
+                  <%= link_to user_path(reservation.user.id), {class: 'text-decoration-none'} do %>
+                    <% if reservation.user.photo.attached? %>
+                      <%= cl_image_tag reservation.user.photo.key, width:40, height:40, class: "avatar-bordered" %>
+                    <% else %>
+                      <%= cl_image_tag('https://res.cloudinary.com/dkdk2tuol/image/upload/v1623314871/tableshare/empty_avatar_wbkvsx_1_dl7y1h.png', width:40, height:40, class: "avatar-bordered") %>
+                    <% end %>
                   <% end %>
                 </div>
               <% end %>
@@ -249,6 +247,8 @@
   .no_show {
     display:none ;
   }
+
+
 
 </style>
 
