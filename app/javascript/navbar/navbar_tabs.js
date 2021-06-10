@@ -1,31 +1,29 @@
-function navTabs(evt, tabTitle) {
   // Declare all variables
+  function navTabs(evt, tabTitle) {
   var i, tabcontent, tablinks;
-
-  // Get all elements with class="tabcontent" and hide them
   tabcontent = document.getElementsByClassName("tabcontent");
-  if (tabcontent) {
-      for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-      }
-
-      // Get all elements with class="tablinks" and remove the class "active"
-      tablinks = document.getElementsByClassName("tablinks");
-      if (tablinks) {
-        for (i = 0; i < tablinks.length; i++) {
-          tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-
-        // Show the current tab, and add an "active" class to the button that opened the tab
-        if (tabTitle) {
-          tabTitle.style.display = "block";
-          evt.currentTarget.className += " active";
-        }
-
-      }
-
-    }
-
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
   }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  var tabTitle = document.getElementById(tabTitle)
+  if (tabTitle) {
+    tabTitle.style.display = "block";
+  }
+  if (evt) {
+    evt.currentTarget.className += " active";
+    }
+  }
+
+
+
+  var defaultOpen =  document.getElementById("defaultOpen")
+  if(defaultOpen) {
+    defaultOpen.click();
+  }
+
 
 export { navTabs };

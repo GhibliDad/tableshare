@@ -97,7 +97,8 @@
                       <%= guest.about %>
                     </div>
                     <div class="modal-footer">
-                      <%= link_to "Go to profile", user_path(guest), :id=>"", :class=>"btn btn-outline-warning" %>
+                      <%= link_to "Go to profile", user_path(guest), :id=>"guest_modal", :class=>"btn btn-outline-warning" %>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                   </div>
                 </div>
@@ -172,7 +173,8 @@
         <%= @host.about %>
       </div>
       <div class="modal-footer">
-        <%= link_to "Go to profile", user_path(@event), :id=>"", :class=>"btn btn-outline-warning" %>
+        <%= link_to "Go to profile", user_path(@host), :id=>"guest_modal", :class=>"btn btn-outline-warning" %>
+        <button type="button" id="modal_close" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -203,3 +205,12 @@
   <% end %>
  <% end %>
 <% end %>
+
+<script>
+  var btn = document.getElementById("guest_modal")
+  btn.addEventListener("click", function(e){
+    var close = document.getElementById("modal_close").click()
+  })
+
+
+</script>
