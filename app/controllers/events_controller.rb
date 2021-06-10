@@ -6,11 +6,11 @@ class EventsController < ApplicationController
     search = params[:search]
     if search.nil? || search[:address].empty? && search[:date1].empty?
       @events = Event.all
+      @events = @events.where('start_time > ?', Date.today)
       @coordinates = @events.geocoded.map do |event|
         {
           lat: event.latitude,
           lng: event.longitude,
-          info_window: render_to_string(partial: "info_window", locals: { event: event }),
           image_url: helpers.asset_url('/images/map_marker_logo.png'),
           event_id: event.id
         }
@@ -24,7 +24,6 @@ class EventsController < ApplicationController
         {
           lat: event.latitude,
           lng: event.longitude,
-          info_window: render_to_string(partial: "info_window", locals: { event: event }),
           image_url: helpers.asset_url('/images/map_marker_logo.png'),
           event_id: event.id
         }
@@ -36,7 +35,6 @@ class EventsController < ApplicationController
         {
           lat: event.latitude,
           lng: event.longitude,
-          info_window: render_to_string(partial: "info_window", locals: { event: event }),
           image_url: helpers.asset_url('/images/map_marker_logo.png'),
           event_id: event.id
         }
@@ -51,7 +49,6 @@ class EventsController < ApplicationController
         {
           lat: event.latitude,
           lng: event.longitude,
-          info_window: render_to_string(partial: "info_window", locals: { event: event }),
           image_url: helpers.asset_url('/images/map_marker_logo.png'),
           event_id: event.id
         }
