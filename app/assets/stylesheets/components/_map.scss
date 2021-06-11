@@ -6,8 +6,17 @@
 
 .card-product.selected {
   // box-shadow:         3px 3px 5px 6px #ccc;
-  background-color: #fff0e2;
+  background-color: #e19b53;
   transition: all ease 0.5s;
+    h2 {
+    color: white !important;
+    transition: all ease 0.5s;
+  }
+  .event-price{
+    transition: all ease 0.5s;
+    color: white !important;
+    border-color: white !important;
+  }
 }
 
 .marker.selected {
