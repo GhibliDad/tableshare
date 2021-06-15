@@ -1,3 +1,7 @@
+<% content_for :meta_title, "#{@event.title} is on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_description, @event.description %>
+<% content_for :meta_image, cl_image_path(@event.photo.key) %>
+
 <% if @event.photo.attached? %>
   <div class="img-fluid show-banner" style="background-image:url('<%= cl_image_path(@event.photo.key) %>');">
     <h2><%= @event.title %></h2>
