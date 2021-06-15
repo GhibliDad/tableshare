@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Welcome to TableShare!</title>
-    <meta name="description" content="Share food. Share happiness. TableShare.">
+    <title><%= meta_title %></title>
+    <meta name="description" content="<%= meta_description %>">
+
     <meta name="keywords" content="food sharing, community experience, food marketplace, tableshare, table, sharing">
     <meta name="author" content="Towa S, Daniela R, Rui R">
-    <meta property="og:image" content='<%= cl_image_tag("https://res.cloudinary.com/dkdk2tuol/image/upload/v1623769406/tableshare/TableShareHeroImage_wg87jq.png") %>'/>
+    <meta property="image" content="<%= meta_image %>" />
+
+    <!-- Facebook Open Graph data -->
+    <meta property="og:title" content="<%= meta_title %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:image" content="<%= meta_image %>" />
+    <meta property="og:description" content="<%= meta_description %>" />
+    <meta property="og:site_name" content="<%= meta_title %>" />
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -15,7 +24,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application' %>
-      <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
 
   </head>
 

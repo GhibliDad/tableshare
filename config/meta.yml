@@ -1,0 +1,5 @@
+meta_product_name: "TableShare"
+meta_title: "Share food. Share happiness. TableShare."
+meta_description: "Want to hold a pop up restaurant in your own home? Want to have an authentic local dining experience? TableShare is the place to share food, share stories, share happiness."
+meta_image: "TableShareHeroImage.png" # should exist in `app/assets/images/`
+# twitter_account: "@product_twitter_account"   # required for Twitter Cards
